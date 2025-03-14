@@ -34,7 +34,8 @@ CREATE TABLE dish (
     id_dish SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     price DECIMAL(6,2) NOT NULL,
-    type dish_type_enum NOT NULL  -- Usando el tipo ENUM definido anteriormente
+    type dish_type_enum NOT NULL,  -- Usando el tipo ENUM definido anteriormente
+    details VARCHAR(255)
 );
 
 -- Table 'order'
@@ -97,20 +98,21 @@ INSERT INTO allergen (name) VALUES
 ('Mostaza');
 
 -- Inserting data for 'dish'
-INSERT INTO dish (name, price, type) VALUES
-('Ensalada mixta', 5.99, 'VEGETARIANO'),
-('Paella de mariscos', 12.99, 'PESCADO'),
-('Tacos de carne', 7.49, 'CARNE'),
-('Salmón al horno', 14.99, 'PESCADO'),
-('Pasta con pesto', 8.99, 'VEGETARIANO'),
-('Pollo asado', 9.49, 'CARNE'),
-('Ceviche', 10.99, 'PESCADO'),
-('Hamburguesa clásica', 6.99, 'CARNE'),
-('Sopa de verduras', 4.99, 'VEGETARIANO'),
-('Pizza de 4 quesos', 11.99, 'OTROS'),  -- Dish in 'OTROS' category
-('Tartar de atún', 15.99, 'OTROS'), -- Dish in 'OTROS' category that has not been ordered
-('Arroz blanco', 3.99, 'OTROS'),    -- Dish in 'OTROS' category that has not been ordered
-('Pollo a la plancha', 7.49, 'CARNE'); -- Dish in 'CARNE' category that has not been ordered
+INSERT INTO dish (name, price, type, details) VALUES
+('Ensalada mixta', 5.99, 'VEGETARIANO', 'Ensalada fresca con lechuga, tomate y zanahoria'),
+('Paella de mariscos', 12.99, 'PESCADO', 'Paella tradicional con mariscos frescos y arroz'),
+('Tacos de carne', 7.49, 'CARNE', 'Tacos de carne asada con cebolla y cilantro'),
+('Salmón al horno', 14.99, 'PESCADO', 'Salmón fresco al horno con hierbas aromáticas'),
+('Pasta con pesto', 8.99, 'VEGETARIANO', 'Pasta con salsa pesto casera y piñones'),
+('Pollo asado', 9.49, 'CARNE', 'Pollo asado a la parrilla con hierbas y especias'),
+('Ceviche', 10.99, 'PESCADO', 'Ceviche fresco con pescado, cebolla morada y limón'),
+('Hamburguesa clásica', 6.99, 'CARNE', 'Hamburguesa de carne de res con queso, lechuga y tomate'),
+('Sopa de verduras', 4.99, 'VEGETARIANO', 'Sopa casera de verduras frescas de temporada'),
+('Pizza de 4 quesos', 11.99, 'OTROS', 'Pizza con mozzarella, parmesano, gouda y queso azul'),
+('Tartar de atún', 15.99, 'OTROS', 'Tartar de atún fresco con aguacate y cebollín'),
+('Arroz blanco', 3.99, 'OTROS', 'Arroz blanco al vapor, ideal como acompañamiento'),
+('Pollo a la plancha', 7.49, 'CARNE', 'Pollo a la plancha con limón y especias');
+
 
 -- Inserting data for 'order'
 INSERT INTO "order" (total_price, delivery_address, status, id_user) VALUES
