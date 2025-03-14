@@ -1,8 +1,8 @@
 <?php
 
 // Incluir la clase DatabaseConnection
-require_once 'app/config/configDB.php';
-require_once 'app/models/DatabaseConnection.php';
+require_once 'app\config\configDB.php';
+require_once 'app\models\DatabaseConnection.php';
 
 try {
     // Obtener la instancia de la base de datos (singleton)
