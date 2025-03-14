@@ -16,8 +16,8 @@ class DatabaseConnection {
 
    private function __construct() {
     try {
-        // configurado el puerto 5433. Modificar si es necesario
-        $dsn = "pgsql:host=" . DB_SERVER . ";port=5433;dbname=" . DATABASE . ";options='--client_encoding=UTF8'";
+        // configurado el puerto 5432. Modificar si es necesario
+        $dsn = "pgsql:host=" . DB_SERVER . ";port=5432;dbname=" . DATABASE . ";options='--client_encoding=UTF8'";
         $this->dbh = new PDO($dsn, DB_USER, DB_PASSWD);
         $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
