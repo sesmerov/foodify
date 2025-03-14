@@ -5,6 +5,7 @@ class Dish {
     private $name;
     private $price;
     private $type;
+    private $details;
 
     function __set($name, $value) {
         if (property_exists($this, $name)) {
