@@ -1,0 +1,6 @@
+# Ignorar todos los archivos y carpetas que empiezan con 'config'
+config*
+
+# Ejemplo: No ignorar 'example-configDB.php' si está en la raíz del proyecto
+
+!example-configDB.php
