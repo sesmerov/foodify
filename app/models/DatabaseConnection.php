@@ -71,6 +71,13 @@ public function getDishes($limit, $offset) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
+public function getRandomDishes($limit = 6) {
+    $stmt = $this->dbh->prepare("SELECT * FROM public.dish ORDER BY RANDOM() LIMIT :limit");
+    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, 'Dish');
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 
 public function getUsers($limit, $offset) {
     $stmt = $this->dbh->prepare("SELECT * FROM public.user LIMIT :limit OFFSET :offset");
