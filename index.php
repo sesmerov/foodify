@@ -1,4 +1,7 @@
 <?php
 
+include_once 'app/controllers/DishController.php';
+include_once 'app/helpers/utilities.php';
 
- require_once "app/views/main.php";
+$controller = new DishController();
+$controller->showRandomDishes();

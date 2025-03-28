@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,53 +104,59 @@
     <!-- SECCION COMO FUNCIONA -->
     <div class="w-full bg-white py-12">
         <div class="text-center">
-            <h2 class="text-2xl font-semibold mb-8">COMO FUNCIONA</h2>
+            <h2 class="text-2xl font-semibold mb-8">Cómo funciona</h2>
             <div class="flex justify-center gap-8">
                 <div class="text-center">
-                    <img src="pato.jpeg" alt="Imagen 1" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
-                    <h3 class="how-it-works-title">Elige tu menú</h3>
-                    <p class="text-gray-600 mb-0">Selecciona tus platos favoritos de nuestra amplia variedad.</p>
+                    <img src="web/media/images/funciona1.webp" alt="Imagen 1" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
+                    <h3 class="how-it-works-title">Explora el menú</h3>
+                    <p class="text-gray-600 mb-0">Descubre nuestros platos y elige lo que más te apetezca.</p>
                 </div>
                 <div class="text-center">
-                    <img src="pato.jpeg" alt="Imagen 2" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
-                    <h3 class="how-it-works-title">Realiza tu pedido</h3>
-                    <p class="text-gray-600 mb-0">Haz tu pedido en minutos y elige la hora de entrega.</p>
+                    <img src="web/media/images/funciona2.webp" alt="Imagen 2" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
+                    <h3 class="how-it-works-title">Haz tu pedido</h3>
+                    <p class="text-gray-600 mb-0">Completa tu pedido y dinos dónde entregarlo.</p>
                 </div>
                 <div class="text-center">
-                    <img src="pato.jpeg" alt="Imagen 3" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
-                    <h3 class="how-it-works-title">Disfruta en casa</h3>
-                    <p class="text-gray-600 mb-0">Recibe tu comida en la puerta de tu casa y disfruta.</p>
+                    <img src="web/media/images/funciona3.webp" alt="Imagen 3" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
+                    <h3 class="how-it-works-title">Recibe y disfruta</h3>
+                    <p class="text-gray-600 mb-0">Te llevamos la comida caliente a casa. ¡Buen provecho!</p>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- SECCION MENU DEL DIA -->
-    <div class="container mx-auto px-6 py-8"><br>
-        <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center">MENU DEL DIA</h2>
-        <p class=" mt-2 text-center mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia perferendis dicta sit consectetur ab quibusdam quo facere corporis soluta consequuntur.</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- PRIMERO -->
-            <div class="text-center">
-                <img src="pato.jpeg" alt="Paso 1" class="mx-auto mb-4 rounded-lg">
-                <h3 class="how-it-works-title">Nombre primero</h3>
-                <p class="text-gray-600">Descripcion opcional</p>
-            </div>
-            <!-- SEGUNDO -->
-            <div class="text-center">
-                <img src="pato.jpeg" alt="Paso 2" class="mx-auto mb-4 rounded-lg">
-                <h3 class="how-it-works-title">Nombre segundo</h3>
-                <p class="text-gray-600">Descripcion opcional</p>
-            </div>
-            <!-- POSTRE -->
-            <div class="text-center">
-                <img src="pato.jpeg" alt="Paso 3" class="mx-auto mb-4 rounded-lg">
-                <h3 class="how-it-works-title">Nombre postre</h3>
-                <p class="text-gray-600">Descripcion opcional</p>
-            </div>
-        </div>
-    </div><br><br>
+<!-- SECCION EXPLORA POR TIPO DE PLATO -->
+<div class="container mx-auto px-6 py-8"><br>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center">Explora por tipo de plato</h2>
+    <p class="mt-2 text-center mb-8">Elige la categoría que más te apetezca y descubre los platos que tenemos preparados para ti.</p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <!-- VEGETARIANO -->
+        <a href="index.php?type=vegetariano" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <img src="web/media/images/vegetariano.webp" alt="Vegetariano" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
+            <h3 class="how-it-works-title">Vegetariano</h3>
+            <p class="text-gray-600">Platos sin carne ni pescado, llenos de sabor.</p>
+        </a>
+        <!-- PESCADO -->
+        <a href="index.php?type=pescado" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <img src="web/media/images/pescado.webp" alt="Pescado" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
+            <h3 class="how-it-works-title">Pescado</h3>
+            <p class="text-gray-600">Delicias del mar frescas y sabrosas.</p>
+        </a>
+        <!-- CARNE -->
+        <a href="index.php?type=carne" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <img src="web/media/images/carne.webp" alt="Carne" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
+            <h3 class="how-it-works-title">Carne</h3>
+            <p class="text-gray-600">Sabores intensos para los amantes de la carne.</p>
+        </a>
+        <!-- OTROS -->
+        <a href="index.php?type=otros" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <img src="web/media/images/otros.webp" alt="Otros" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
+            <h3 class="how-it-works-title">Otros</h3>
+            <p class="text-gray-600">Sopas, postres y todo lo que no te esperas.</p>
+        </a>
+    </div>
+</div><br><br>
 
 
     <!-- CARRUSEL NUESTROS PLATOS -->
@@ -160,20 +167,16 @@
         </div>
         <div class="w-full carousel-wrapper overflow-hidden relative">
             <div class="w-full carousel-track flex">
+
                 <!-- SECCION 1 (IMAGENES ORIGINALES) -->
-                <img src="pato.jpeg" alt="Plato 1" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 2" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 3" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 4" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 5" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 6" class="carousel-item">
+                <?php foreach ($dishes as $dish): ?>
+                    <img src="<?= getClientImage($dish->id_dish) ?>" alt="<?= htmlspecialchars($dish->name) ?>" class="carousel-item">
+                <?php endforeach; ?>
+
                 <!-- SECCION 2 (IMAGENES DUPLICADAS PARA EL LOOP) -->
-                <img src="pato.jpeg" alt="Plato 1" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 2" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 3" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 4" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 5" class="carousel-item">
-                <img src="pato.jpeg" alt="Plato 6" class="carousel-item">
+                <?php foreach ($dishes as $dish): ?>
+                    <img src="<?= getClientImage($dish->id_dish) ?>" alt="<?= htmlspecialchars($dish->name) ?>" class="carousel-item">
+                <?php endforeach; ?>
             </div>
         </div>
         <div class="text-center mt-8">
@@ -183,64 +186,64 @@
         </div>
     </div>
 
-    <!-- SECCION DUDAS -->
-    <div class="bg-gray-200 py-12"><br><br>
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center">
-                <h1 class="text-5xl font-bold text-gray-800">Dudas más típicas</h1>
-            </div>
 
-            <div class="space-y-4 m-8 px-10">
-                <!-- Duda 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button onclick="toggleCollapse('collapse1')"
-                        class="w-full text-left p-4 flex justify-between items-center">
-                        <span class="font-semibold">¿Cuánto cuesta Foodify?</span>
-                    </button>
-                    <div id="collapse1" class="hidden px-4 pb-4">
-                        <p class="text-gray-600">Tú lo eliges. El precio dependerá de los platos que quieras para tu primera entrega. Ese será el precio de tu suscripción. A partir de ahí, recibirás cada semana platos adaptados a tus gustos y su precio si no haces cambios nunca superará el de tu primer pedido. Podrás elegir platos desde 6,69€/comida.</p>
-                    </div>
+    <!-- SECCION DUDAS -->
+<div class="bg-gray-200 py-12"><br><br>
+    <div class="max-w-3xl mx-auto">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold text-gray-800">Preguntas frecuentes</h1>
+        </div>
+
+        <div class="space-y-4 m-8 px-10">
+            <!-- Duda 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button onclick="toggleCollapse('collapse1')"
+                    class="w-full text-left p-4 flex justify-between items-center">
+                    <span class="font-semibold">¿Cuánto cuesta un pedido?</span>
+                </button>
+                <div id="collapse1" class="hidden px-4 pb-4">
+                    <p class="text-gray-600">Depende de los platos que elijas. Solo pagas por lo que consumes, sin tarifas adicionales ni suscripciones.</p>
                 </div>
-                <!-- Duda 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button onclick="toggleCollapse('collapse2')" class="w-full text-left p-4 flex justify-between items-center">
-                        <span class="font-semibold">¿Qué pasa si una semana no puedo o no quiero recibir mi menú?</span>
-                    </button>
-                    <div id="collapse2" class="hidden px-4 pb-4">
-                        <p class="text-gray-600">Por supuesto, podrás pausar entregas si alguna semana no necesitas que te hagamos la comida y lo podrás hacer las veces que quieras y en todo momento.</p>
-                    </div>
+            </div>
+            <!-- Duda 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button onclick="toggleCollapse('collapse2')" class="w-full text-left p-4 flex justify-between items-center">
+                    <span class="font-semibold">¿Tengo que pedir todos los días?</span>
+                </button>
+                <div id="collapse2" class="hidden px-4 pb-4">
+                    <p class="text-gray-600">Para nada. Pide cuando quieras. En Foodify no hay compromisos, solo comodidad.</p>
                 </div>
-                <!-- Duda 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button onclick="toggleCollapse('collapse3')" class="w-full text-left p-4 flex justify-between items-center">
-                        <span class="font-semibold">¿Qué me va a llegar exactamente?</span>
-                    </button>
-                    <div id="collapse3" class="hidden px-4 pb-4">
-                        <p class="text-gray-600">Recibirás platos adaptados a tus gustos y preferencias, preparados con ingredientes frescos y de alta calidad.</p>
-                    </div>
+            </div>
+            <!-- Duda 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button onclick="toggleCollapse('collapse3')" class="w-full text-left p-4 flex justify-between items-center">
+                    <span class="font-semibold">¿Qué tipo de comida tienen?</span>
+                </button>
+                <div id="collapse3" class="hidden px-4 pb-4">
+                    <p class="text-gray-600">Ofrecemos una variedad de platos preparados al momento, con ingredientes frescos y pensados para todos los gustos.</p>
                 </div>
-                <!-- Duda 4 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button onclick="toggleCollapse('collapse4')" class="w-full text-left p-4 flex justify-between items-center">
-                        <span class="font-semibold">¿Cuándo recibiré mi pedido?</span>
-                    </button>
-                    <div id="collapse4" class="hidden px-4 pb-4">
-                        <p class="text-gray-600">Los pedidos se entregan semanalmente en la fecha y hora que elijas durante el proceso de suscripción.</p>
-                    </div>
+            </div>
+            <!-- Duda 4 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button onclick="toggleCollapse('collapse4')" class="w-full text-left p-4 flex justify-between items-center">
+                    <span class="font-semibold">¿Cuánto tarda en llegar el pedido?</span>
+                </button>
+                <div id="collapse4" class="hidden px-4 pb-4">
+                    <p class="text-gray-600">Nuestro equipo entrega en franjas horarias que eliges al confirmar tu pedido. Siempre puntuales y con la comida caliente.</p>
                 </div>
-                <!-- Duda 5 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button onclick="toggleCollapse('collapse5')" class="w-full text-left p-4 flex justify-between items-center">
-                        <span class="font-semibold">¿Cómo puedo cancelar mi suscripción?</span>
-                    </button>
-                    <div id="collapse5" class="hidden px-4 pb-4">
-                        <p class="text-gray-600">Puedes cancelar tu suscripción en cualquier momento desde tu cuenta en la página web o contactando con nuestro servicio de atención al cliente.</p>
-                    </div>
+            </div>
+            <!-- Duda 5 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button onclick="toggleCollapse('collapse5')" class="w-full text-left p-4 flex justify-between items-center">
+                    <span class="font-semibold">¿Tengo que registrarme?</span>
+                </button>
+                <div id="collapse5" class="hidden px-4 pb-4">
+                    <p class="text-gray-600">No es obligatorio, pero crear una cuenta te permite guardar tus direcciones, ver pedidos anteriores y repetirlos fácilmente.</p>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 
     <!-- FOOTER -->
     <footer class="w-full bg-gray-200 text-white py-8 rounded-2xl">
@@ -295,4 +298,5 @@
 
     <script src="web/js/script.js"></script>
 </body>
+
 </html>
