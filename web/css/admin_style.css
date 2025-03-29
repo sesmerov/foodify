@@ -1,0 +1,34 @@
+.bg-custom-red {
+    background-color: #EF4444;
+}
+
+.border-custom-red {
+    border-color: #EF4444;
+}
+
+.hover\:bg-custom-red:hover {
+    background-color: #ffffff;
+}
+
+.nav-button {
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    color: #EF4444;
+    transform: scale(1.05);
+}
+
+.text-custom-red {
+    color: #EF4444;
+}
+
+.hover\:text-custom-red:hover {
+    color: #EF4444;
+}
+
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+}
+
