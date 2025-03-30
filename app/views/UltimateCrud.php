@@ -28,7 +28,7 @@ switch ($orderType) {
                         <td class="px-4 py-2"><?= $usu->role; ?></td>
                         <td class="px-4 py-2">
                             <div class="flex space-x-2">
-                                <a href="index.php?order=delete&id=<?= $usu->id_user ?>" class="text-red-500 hover:text-red-900 transition duration-300">
+                                <a href="index.php?order=deleteU&id=<?= $usu->id_user ?>" class="text-red-500 hover:text-red-900 transition duration-300">
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <a href="index.php?order=mod&id=<?= $usu->id_user ?>" class="text-yellow-500 hover:text-yellow-900 transition duration-300">
@@ -68,7 +68,7 @@ switch ($orderType) {
                                 <a href="index.php?order=details&id=<?= $ord->id_order ?>" class="text-blue-500 hover:text-blue-900 transition duration-300">
                                     <i class="fas fa-info-circle"></i>
                                 </a>
-                                <a href="index.php?order=delete&id=<?= $ord->id_order ?>" class="text-red-500 hover:text-red-900 transition duration-300">
+                                <a href="index.php?order=deleteO&id=<?= $ord->id_order ?>" class="text-red-500 hover:text-red-900 transition duration-300">
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <a href="index.php?order=mod&id=<?= $ord->id_order ?>" class="text-yellow-500 hover:text-yellow-900 transition duration-300">
@@ -108,7 +108,7 @@ switch ($orderType) {
                                 <a href="index.php?order=details&id=<?= $dish->id_dish ?>" class="text-blue-500 hover:text-blue-900 transition duration-300">
                                     <i class="fas fa-info-circle"></i>
                                 </a>
-                                <a href="index.php?order=delete&id=<?= $dish->id_dish ?>" class="text-red-500 hover:text-red-900 transition duration-300">
+                                <a href="index.php?order=deleteD&id=<?= $dish->id_dish ?>" class="text-red-500 hover:text-red-900 transition duration-300">
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <a href="index.php?order=mod&id=<?= $dish->id_dish ?>" class="text-yellow-500 hover:text-yellow-900 transition duration-300">

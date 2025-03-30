@@ -11,4 +11,9 @@ class DishController {
         require_once 'app/views/main.php'; // Renderiza la vista y pasa $dishes
     }
 
+    public function DeleteDish($id){
+        $db = DatabaseConnection::getModel();
+        $db->DeleteDish($id);
+    }
+
 }
