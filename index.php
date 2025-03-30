@@ -13,12 +13,24 @@ $controller = new DishController();
 $controller->showRandomDishes();
 define('FPAG', 5);
 $db = DatabaseConnection::getModel();
-$usufiles = $db->getNumUsers();
+switch ($_GET["order"]) {
+    case 'usu':
+        $usufiles = $db->getNumUsers();
+        break;
+    
+    case 'order':
+        $usufiles = $db->getNumOrders();
+        break;
+    case 'dish':
+        $usufiles = $db->getNumDishes();
+        break; 
+}
+
 
 if ($usufiles % FPAG == 0) {
     $posfin = $usufiles - FPAG;
 } else {
-    $posend = $usufiles - ($usufiles % FPAG);
+    $posfin = $usufiles - ($usufiles % FPAG);
 }
 
 if (!isset($_SESSION['posini'])) {
@@ -75,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             break;
         case 'usu':
             ob_clean();
-            
             $posini = $_SESSION['posini'];
             $users = $db->getUsers(FPAG, $posini);
             include_once 'app\views\adminview.php';
@@ -83,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         case 'order':
             ob_clean();
+         
             $posini = $_SESSION['posini'];
             $orders = $db->getOrders(FPAG, $posini);
             include_once 'app\views\adminview.php';
@@ -90,14 +102,15 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         case 'dish':
             ob_clean();
+         
             $posini = $_SESSION['posini'];
             $dishes = $db->getDishes(FPAG, $posini);
             include_once 'app\views\adminview.php';
             break;
 
-        case 'delete':
+        case 'deleteU':
             ob_clean();
-            DeleteCrud($_GET["id"], $_GET["type"]);
+            
             break;
     }
 }
