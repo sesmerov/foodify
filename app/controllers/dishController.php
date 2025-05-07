@@ -46,11 +46,23 @@ class DishController {
         return $allergens;
     }
 
+    public function getAllergensByDishID($id) {
+        $db = DatabaseConnection::getModel();
+        $allergens = $db->getAllergensByDish($id);
+        return $allergens;
+    }
+
     public function getDishesByFilters(array $types, array $allergens): array
     {
         $db = DatabaseConnection::getModel();
         $dishes = $db->getDishesByFilters($types, $allergens);
         return $dishes;
 
+    }
+
+    public function getDishById($id) {
+        $db = DatabaseConnection::getModel();
+        $dish = $db->getDishById($id);
+        return $dish;
     }
 }

@@ -170,7 +170,7 @@
                         </button>
                         <!-- Botón Detalles -->
                         <a
-                            href="dish.php?id=<?= $dish->id_dish ?>"
+                            href="index.php?dish&id=<?= $dish->id_dish ?>"
                             class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300">
                             Detalles
                         </a>
