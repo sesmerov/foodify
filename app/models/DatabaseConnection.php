@@ -29,8 +29,8 @@ class DatabaseConnection
     {
         try {
             // configurado el puerto 5432. Modificar si es necesario
-            $dsn = "pgsql:host=" . DB_SERVER . ";port=5432;dbname=" . DATABASE . ";options='--client_encoding=UTF8'";
-            $this->dbh = new PDO($dsn, DB_USER, DB_PASSWD);
+            $dsn = "pgsql:host=" . getenv('DB_SERVER') . ";port=5432;dbname=" . getenv('DATABASE') . ";options='--client_encoding=UTF8'";
+            $this->dbh = new PDO($dsn, getenv('DB_USER'), getenv('DB_PASSWD'));
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "Error de conexión: " . $e->getMessage();
