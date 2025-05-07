@@ -200,6 +200,24 @@ class DatabaseConnection
         return $stmt->fetch();
     }
 
+    public function getDishById($id){
+        $stmt = $this->dbh->prepare("SELECT * FROM public.dish WHERE id_dish = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Dish');
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function getAllergenByDishID($id)
+    {
+        $stmt = $this->dbh->prepare("SELECT * FROM public.dish_allergen WHERE id_dish = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Allergen');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    
+
 
     // ==== FILTRADO, ORDENAR ====
 
@@ -227,17 +245,15 @@ class DatabaseConnection
     // ==== REELACIONES? ====
 
 
-    public function getAllergensByDish($dishId)
-    {
-        $stmt = $this->dbh->prepare("SELECT id_allergen FROM public.dish_allergen WHERE id_dish = :dishId");
-        $stmt->bindParam(':dishId', $dishId, PDO::PARAM_INT);
-        $stmt->execute();
-        $allergens = [];
-        while ($row = $stmt->fetch()) {
-            $allergens[] = $this->getAllergen($row['id_allergen']);
-        }
-        return $allergens;
-    }
+public function getAllergensByDish(int $dishId): array
+{
+    $sql = "SELECT a.name FROM public.dish_allergen da JOIN public.allergen a ON a.id_allergen = da.id_allergen WHERE da.id_dish = :dishId ORDER BY a.name";
+    $stmt = $this->dbh->prepare($sql);
+    $stmt->bindParam(':dishId', $dishId, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
 
     public function getOrderDishes($orderId)
     {

@@ -153,4 +153,17 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         ob_clean();
         include_once 'app/views/dishesView.php';
     }
+
+
+    //INIDIVIDUAL DISH
+    if (isset($_GET['dish'])) {
+        if (isset($_GET['id'])) {
+            $dish = $controller->getDishById($_GET['id']);
+            $allergens = $controller->getAllergensByDishID($_GET['id']);
+            ob_clean();
+            include_once 'app/views/dishview.php';
+        } 
+    }
+
+
 }
