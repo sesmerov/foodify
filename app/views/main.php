@@ -16,7 +16,7 @@
     <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
         <div class="container px-6 py-3">
             <div class="flex justify-between items-center">
-                <div class="text-lg font-semibold text-gray-800 mr-12"> Foodify </div>
+                <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
                 <div>
                     <form action="" class="flex space-x-5">
                         <button class="nav-button text-sm" name="order">Iniciar Sesión</button>
@@ -134,25 +134,25 @@
         <p class="mt-2 text-center mb-8">Elige la categoría que más te apetezca y descubre los platos que tenemos preparados para ti.</p>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <!-- VEGETARIANO -->
-            <a href="index.php?type=vegetariano" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <a href="index.php?all-dishes&type=VEGETARIANO" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
                 <img src="web/media/images/vegetariano.webp" alt="Vegetariano" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
                 <h3 class="how-it-works-title">Vegetariano</h3>
                 <p class="text-gray-600">Platos sin carne ni pescado, llenos de sabor.</p>
             </a>
             <!-- PESCADO -->
-            <a href="index.php?type=pescado" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <a href="index.php?all-dishes&type=PESCADO" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
                 <img src="web/media/images/pescado.webp" alt="Pescado" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
                 <h3 class="how-it-works-title">Pescado</h3>
                 <p class="text-gray-600">Delicias del mar frescas y sabrosas.</p>
             </a>
             <!-- CARNE -->
-            <a href="index.php?type=carne" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <a href="index.php?all-dishes&type=CARNE" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
                 <img src="web/media/images/carne.webp" alt="Carne" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
                 <h3 class="how-it-works-title">Carne</h3>
                 <p class="text-gray-600">Sabores intensos para los amantes de la carne.</p>
             </a>
             <!-- OTROS -->
-            <a href="index.php?type=otros" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <a href="index.php?all-dishes&type=OTROS" class="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6">
                 <img src="web/media/images/otros.webp" alt="Otros" class="mx-auto mb-4 rounded-lg w-32 h-32 object-cover">
                 <h3 class="how-it-works-title">Otros</h3>
                 <p class="text-gray-600">Sopas, postres y todo lo que no te esperas.</p>
@@ -182,9 +182,11 @@
             </div>
         </div>
         <div class="text-center mt-8">
-            <button class="bg-white text-red-600 font-semibold py-2 px-6 rounded-lg hover:bg-red-50 transition-colors duration-300">
-                Ver todos los platos
-            </button>
+
+            <a href="index.php?all-dishes"> 
+                <button class="bg-white text-red-600 font-semibold py-2 px-6 rounded-lg hover:bg-red-50 transition-colors duration-300">Ver todos los platos</button>
+            </a>
+
         </div>
     </div>
 

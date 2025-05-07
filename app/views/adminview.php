@@ -11,7 +11,7 @@
 
 <body class="flex flex-col items-center min-h-screen">
   <nav class="bg-white  w-full px-12 py-4 mb-9 flex justify-between items-center">
-    <div class="text-xl font-semibold text-gray-800"> Foodify </div>
+    <div class="text-xl font-semibold text-gray-800"> <a href="./index.php">Foodify</a> </div>
     <div>
       <form action="" class="flex space-x-8">
       <button class="nav-button text-sm hover:text-custom-red" name="order" value="main">Pagina principal</button>

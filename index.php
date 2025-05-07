@@ -10,32 +10,33 @@ include_once 'app/models/Allergen.php';
 
 ob_start();
 $controller = new DishController();
-$controller->showRandomDishes();
+$dishes = $controller->showRandomDishes();
+require_once 'app/views/main.php'; // Renderiza la vista principal
+
 define('FPAG', 5);
 $db = DatabaseConnection::getModel();
 
-if(isset($_GET["order"])){             
+if (isset($_GET["order"])) {
     switch ($_GET["order"]) {
         case 'usu':
             $usufiles = $db->getNumUsers();
             break;
-        
         case 'order':
             $usufiles = $db->getNumOrders();
             break;
         case 'dish':
             $usufiles = $db->getNumDishes();
-            break; 
+            break;
     }
 }
- 
-if(isset($usufiles)){              
+
+if (isset($usufiles)) {
     if ($usufiles % FPAG == 0) {
         $posfin = $usufiles - FPAG;
     } else {
         $posfin = $usufiles - ($usufiles % FPAG);
     }
-} 
+}
 
 if (!isset($_SESSION['posini'])) {
     $_SESSION['posini'] = 0;
@@ -52,7 +53,7 @@ if (isset($_GET['order'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
-//controles para el crudnav
+    //controles para el crudnav
     if (isset($_GET['nav'])) {
         switch ($_GET['nav']) {
             case "Begin":
@@ -92,21 +93,64 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             break;
         case 'order':
             ob_clean();
-         
             $posini = $_SESSION['posini'];
             $orders = $db->getOrders(FPAG, $posini);
             include_once 'app\views\adminview.php';
             break;
         case 'dish':
             ob_clean();
-         
             $posini = $_SESSION['posini'];
             $dishes = $db->getDishes(FPAG, $posini);
             include_once 'app\views\adminview.php';
             break;
         case 'deleteU':
             ob_clean();
-            
+
             break;
+    }
+
+    //ALL DISHES
+    if (isset($_GET['all-dishes'])) {
+
+        $types = $controller->getAllDishTypes();
+        $allergens = $controller->getAllAllergens();
+
+
+        //PARA CUANDO EL USUARIO FILTRA POR TIPO Y/O ALERGENO
+        if (isset($_GET['allergen']) && isset($_GET['type'])) {
+
+            $selectedTypes     = $_GET['type']     ?? [];
+            $selectedAllergens = $_GET['allergen'] ?? [];
+
+            $dishes = $controller->getDishesByFilters($selectedTypes, $selectedAllergens);
+            ob_clean();
+            include_once 'app/views/dishesView.php';
+            exit; 
+        }
+
+        //PARA CUANDO SE ACCEDE DESDE MAIN
+        if (isset($_GET['type'])) {
+            $type = $_GET['type'];
+            switch ($type) {
+                case 'VEGETARIANO':
+                    $dishes = $controller->getDishesByType($type);
+                    break;
+                case 'CARNE':
+                    $dishes = $controller->getDishesByType($type);
+                    break;
+                case 'PESCADO':
+                    $dishes = $controller->getDishesByType($type);
+                    break;
+                case 'OTROS':
+                    $dishes = $controller->getDishesByType($type);
+                    break;
+                default:
+                    $dishes = $controller->getAllDishes();
+            }
+        } else {
+            $dishes = $controller->getAllDishes();
+        }
+        ob_clean();
+        include_once 'app/views/dishesView.php';
     }
 }
