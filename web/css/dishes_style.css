@@ -1,0 +1,130 @@
+.bg-custom-red {
+    background-color: #EF4444;
+}
+
+.border-custom-red {
+    border-color: #EF4444;
+}
+
+.hover\:bg-custom-red:hover {
+    background-color: #ffffff;
+}
+
+.nav-button {
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    color: #EF4444;
+    transform: scale(1.05);
+}
+
+.text-custom-red {
+    color: #EF4444;
+}
+
+.hover\:text-custom-red:hover {
+    color: #EF4444;
+}
+
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+}
+
+/* Colores personalizados */
+:root {
+    --color-primary: #EF4444; /* Rojo */
+    --color-primary-light: #FCA5A5; /* Rojo más claro */
+    --color-secondary: #3B82F6; /* Azul */
+    --color-background: #F3F4F6; /* Gris claro */
+    --color-text: #1F2937; /* Gris oscuro */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.nav-button {
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+/* Sección Hero */
+.hero {
+    background-color: var(--color-primary-light);
+    color: #EF4444;
+    background-image: url('https://via.placeholder.com/1200x400');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    border-width: 1px;
+}
+
+.hero-button:hover {
+    background-color: rgba(171, 55, 55, 0.72);
+    transform: scale(1.05);
+}
+
+
+/* Menú del día */
+.menu-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    background-color: var(--color-primary-light);
+    transform: scale(1.05);
+}
+
+
+
+/* Footer */
+.footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--color-primary-light);
+    transform: scale(1.05);
+}
+
+.plus-button, .minus-button {
+    background-color: white;
+    color: var(--color-primary);
+    border-width: 1px;
+    border-color: #EF4444;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.plus-button:hover, .minus-button:hover {
+    background-color: var(--color-primary);
+    color: white;
+    transform: scale(1.10);
+}
