@@ -14,6 +14,10 @@ if (!isset($_SESSION['userLogged'])) {
     $_SESSION['userLogged'] = null;
 }
 
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
 ob_start();
 $controller = new DishController();
 $dishes = $controller->showRandomDishes();
@@ -98,8 +102,51 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             exit;
         case 'register':
             ob_clean();
-             // AQUI SE SUPONE QUE SE INCLUIRÁ LA VISTA PARA REGISTRO CUANDO EXISTA
+            // AQUI SE SUPONE QUE SE INCLUIRÁ LA VISTA PARA REGISTRO CUANDO EXISTA
             break;
+        case 'cart':
+            ob_clean();
+
+            $ids = array_keys($_SESSION['cart']);
+            $cartDishes = $controller->getDishesByIds($ids);
+
+            include_once 'app/views/cartview.php';
+            break;
+        case 'addToCart':
+            ob_clean();
+            $id_dish = $_GET['id_dish'];
+
+            if (isset($_SESSION['cart'][$id_dish])) {
+                $_SESSION['cart'][$id_dish]++;
+            } else {
+                $_SESSION['cart'][$id_dish] = 1;
+            }
+            header("Location: " . $_SERVER['HTTP_REFERER']); // Redirige a lla misma página desde la que se añade a carrito
+            exit;
+        case 'addToCartAllDishes':
+            ob_clean();
+            $id_dish = $_GET['id_dish'];
+            if (isset($_SESSION['cart'][$id_dish])) {
+                $_SESSION['cart'][$id_dish]++;
+            } else {
+                $_SESSION['cart'][$id_dish] = 1;
+            }
+            header("Location: " . $_SERVER['HTTP_REFERER']); // Redirige a la misma pagina desde la que se añade a carrito
+            exit;
+        case 'removeFromCart':
+            ob_clean();
+            $id = $_GET['id_dish'] ?? null;
+
+            if ($id !== null && isset($_SESSION['cart'][$id])) {
+                $_SESSION['cart'][$id]--;
+
+                if ($_SESSION['cart'][$id] <= 0) {
+                    unset($_SESSION['cart'][$id]);
+                }
+            }
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit;
+
         case 'admin':
             ob_clean();
             require_once 'app/views/adminview.php';
@@ -185,13 +232,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 }
 
-if($_SERVER['REQUEST_METHOD'] == "POST") {
-   
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
     if (isset($_POST['email']) && isset($_POST['password'])) {
 
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
-       
+
         $userController = new UserController();
         $user = $userController->getUserByEmail($email);
 
@@ -207,13 +254,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             ob_clean();
             include_once 'app/views/login.php';
         }
-    }else{
-            // Si el login falla, se muestra el formulario de nuevo con un error
-            $loginError = "Email o contraseña incorrectos";
-            ob_clean();
-            include_once 'app/views/login.php';
+    } else {
+        // Si el login falla, se muestra el formulario de nuevo con un error
+        $loginError = "Email o contraseña incorrectos";
+        ob_clean();
+        include_once 'app/views/login.php';
     }
-
-
-
-} 
+}

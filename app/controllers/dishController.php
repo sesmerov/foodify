@@ -65,4 +65,11 @@ class DishController {
         $dish = $db->getDishById($id);
         return $dish;
     }
+
+    public function getDishesByIds(array $ids): array
+    {
+        $db = DatabaseConnection::getModel();
+        $dishes = $db->getDishesByIds($ids);
+        return $dishes;
+    }
 }

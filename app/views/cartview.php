@@ -7,7 +7,7 @@
     <title>Foodify</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="web/css/dish_style.css" rel="stylesheet">
+    <link href="web/css/cart_style.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100">
@@ -40,7 +40,7 @@
                             echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
                         }
                         ?>
-                        <button class="nav-button text-sm" name="order"><i class="fas fa-shopping-cart"></i> Carrito</button>
+                        <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
                         <?php
                         if ($_SESSION['userLogged'] != null) {
                             echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
@@ -52,62 +52,74 @@
         </div>
     </nav>
 
-
     <!-- INTRODUCCION -->
-    <div class="hero flex items-center h-96">
-        <div class="text-left p-9 rounded-lg w-full max-w-screen-xl mx-auto">
-            <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"><br><br><br>
-                <h1 class="text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
-                <p class="text-white mt-4 text-base sm:text-lg">En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.</p>
-                <button class="hero-button mt-6">Registrarse / Iniciar sesión</button>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="max-w-6xl mx-auto bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-lg mt-10">
-
-        <div class="md:w-1/2">
-            <img src=<?= getClientImage($dish->id_dish) ?> alt="<?= htmlspecialchars($dish->name) ?>" class="w-full h-full object-cover">
-        </div>
-        <div class="md:w-1/2 p-6 flex flex-col justify-between">
-            <div>
-                <h2 class="text-5xl font-bold text-gray-800 mb-2"><?= $dish->name ?></h2>
-                <br>
-                <?php if (count($allergens)): ?>
-                    <?php foreach ($allergens as $allergen): ?>
-                        <span class="bg-yellow-300 text-gray-900 px-2 py-1 rounded-full text-sm">
-                            <?= " " . strtoupper(htmlspecialchars($allergen)) . " " ?>
-                        </span>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <span class="bg-green-200 text-green-800 px-2 py-1 rounded-full text-sm">
-                        LIBRE DE ALÉRGENOS
-                    </span>
-                <?php endif; ?>
-                <br>
-                <br>
-                <p class="text-sm text-gray-500 mb-2"><?= $dish->type ?></p>
-                <div class="flex space-x-2 text-xl text-pink-500 mb-4">
-                </div>
-                <p class="text-sm text-gray-700 leading-relaxed">
-                    <?= $dish->details ?> </p>
-            </div>
-            <div class="flex flex-col items-center space-y-4 mt-6">
-                <span class="text-5xl font-bold text-gray-800"><?= $dish->price ?>€</span>
-                <form method="GET" action="index.php?">
-                    <input type="hidden" name="order" value="addToCart">
-                    <input type="hidden" name="id_dish" value="<?= $dish->id_dish ?>">
-                    <button
-                        type="submit"
-                        class="bg-red-600 text-white font-semibold text-xl py-4 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
-                        Añadir
-                    </button>
-                </form>
-            </div>
+    <div class="hero flex items-center justify-center h-96">
+        <div class="text-center p-9 rounded-lg"><br><br><br>
+            <h1 class="text-4xl font-bold text-white">El placer está en tu mano</h1>
+            <p class="text-white mt-4">Cada plato en tu carrito es una promesa de sabor. Completa tu pedido y deja que
+                comience el deleite.</p>
         </div>
     </div>
     <br><br>
+
+    <!-- NUMERO PRODUCTOS -->
+    <div class="container mx-auto px-4 py-8 max-w-2xl">
+        <?php
+        $cartItemCount = array_sum($_SESSION['cart']);
+        ?>
+
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Tu Carrito</h1>
+            <?php if ($cartItemCount > 0): ?>
+                <span class="text-gray-500"><?= $cartItemCount ?> artículo<?= $cartItemCount > 1 ? 's' : '' ?></span>
+            <?php endif; ?>
+        </div>
+
+        <!-- LISTA -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+
+            <?php $total = 0; ?>
+            <?php foreach ($cartDishes as $dish): ?>
+                <?php $quantity = $_SESSION['cart'][$dish->id_dish]; ?>
+                <?php $subtotal = $dish->price * $quantity; ?>
+                <?php $total += $subtotal; ?>
+
+                <div class="p-4 border-b flex items-center">
+                    <img src="<?= getClientImage($dish->id_dish) ?>" alt="<?= htmlspecialchars($dish->name) ?>" class="w-20 h-20 object-cover rounded-md mr-4">
+                    <div class="flex-1 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-medium text-gray-800"><?= htmlspecialchars($dish->name) ?></h3>
+                            <p class="text-gray-500 text-sm"><?= htmlspecialchars($dish->details) ?></p>
+                            <p class="font-medium text-gray-800 mt-1"><?= number_format($dish->price, 2) ?>€ x <?= $quantity ?></p>
+                        </div>
+                        <form method="GET" action="index.php?">
+                            <input type="hidden" name="order" value="removeFromCart">
+                            <input type="hidden" name="id_dish" value="<?= $dish->id_dish ?>">
+                            <button type="submit" class="text-red-500 hover:text-red-700" title="Eliminar del carrito">
+                                <a href="index.php?order=removeFromCart&id=<?= $dish->id_dish ?>" title="Eliminar del carrito" class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+            <div class="flex justify-between text-lg font-bold">
+                <span>Total</span>
+                <span><?= number_format($total, 2) ?>€</span>
+            </div>
+        </div>
+        <div class="flex justify-center mt-6">
+            <button class="w-48 bg-white border-2 border-red-500 text-red-500 font-bold py-2 px-6 rounded-3xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out transform">
+                Realizar Pedido
+            </button>
+        </div> <br>
+    </div>
+
 
     <!-- FOOTER -->
     <footer class="w-full bg-gray-200 text-white py-8 rounded-2xl">
@@ -126,7 +138,6 @@
                         <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-300"> <i
                                 class="fab fa-youtube fa-2x"></i> </a>
                     </div>
-
                     <div class="mt-6 text-gray-800 text-4xl font-bold">Foodify</div>
                 </div>
 
@@ -175,7 +186,6 @@
             </div>
         </div>
     </footer>
-    <script src="./js/script_dishes.js"></script>
 </body>
 
 </html>
