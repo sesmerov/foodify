@@ -7,7 +7,7 @@
     <title>Foodify</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="web/css/dish_style.css" rel="stylesheet">
+    <link href="web/css/login_style.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100">
@@ -54,58 +54,52 @@
     </nav>
 
 
-    <!-- INTRODUCCION -->
-    <div class="hero flex items-center h-96">
-        <div class="text-left p-9 rounded-lg w-full max-w-screen-xl mx-auto">
-            <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"><br><br><br>
-                <h1 class="text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
-                <p class="text-white mt-4 text-base sm:text-lg">En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.</p>
-                <button class="hero-button mt-6">Registrarse / Iniciar sesión</button>
-            </div>
+    <div class="hero flex items-center justify-center min-h-[12rem] bg-red-500 pt-20 pb-10">
+        <div class="text-center text-white px-4 w-full pt-8 pb-6">
+            <h1 class="text-3xl sm:text-4xl font-bold whitespace-nowrap px-4">¡Bienvenido de nuevo a Foodify!</h1>
+            <p class="mt-4 text-base sm:text-lg max-w-md md:max-w-lg mx-auto">
+                Inicia sesión para acceder a tus pedidos, descubrir nuevos platos y disfrutar de una experiencia personalizada. ¡Tu próxima comida está a un clic!
+            </p>
         </div>
     </div>
 
-
-    <div class="max-w-6xl mx-auto bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-lg mt-10">
-
-        <div class="md:w-1/2">
-            <img src=<?= getClientImage($dish->id_dish) ?> alt="<?= htmlspecialchars($dish->name) ?>" class="w-full h-full object-cover">
-        </div>
-        <div class="md:w-1/2 p-6 flex flex-col justify-between">
-            <div>
-                <h2 class="text-5xl font-bold text-gray-800 mb-2"><?= $dish->name ?></h2>
-                <br>
-                <?php if (count($allergens)): ?>
-                    <?php foreach ($allergens as $allergen): ?>
-                        <span class="bg-yellow-300 text-gray-900 px-2 py-1 rounded-full text-sm">
-                            <?= " ".strtoupper(htmlspecialchars($allergen))." " ?>
-                        </span>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <span class="bg-green-200 text-green-800 px-2 py-1 rounded-full text-sm">
-                        LIBRE DE ALÉRGENOS
-                    </span>
-                <?php endif; ?>
-                <br>
-                <br>
-                <p class="text-sm text-gray-500 mb-2"><?= $dish->type ?></p>
-                <div class="flex space-x-2 text-xl text-pink-500 mb-4">
+    <!-- LOGIN -->
+    <section class="flex justify-center items-center py-20 bg-gray-100">
+        <div class="bg-white p-8 rounded shadow-lg w-full max-w-md mt-10">
+            <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Iniciar sesión</h2>
+            <form class="space-y-4" method="POST" action="index.php?order=loginPOST">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+                    <input type="email" id="email" name="email"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
+                        required>
                 </div>
-                <p class="text-sm text-gray-700 leading-relaxed">
-                    <?= $dish->details ?> </p>
-            </div>
-            <div class="flex flex-col items-center space-y-4 mt-6">
-                <span class="text-5xl font-bold text-gray-800"><?= $dish->price ?>€</span>
-                <button
-                    onclick="addToCart(<?= $dish->id_dish ?>)"
-                    class="bg-red-600 text-white font-semibold text-xl py-4 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
-                    Añadir
-                </button>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-600">Contraseña</label>
+                    <input type="password" id="password" name="password"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
+                        required>
+                </div>
+                <div>
+                    <button type="submit"
+                        class="w-full bg-white text-red-500 border border-red-500 hover:bg-red-500 hover:text-white transition-colors transition-transform duration-300 transform hover:scale-105 font-semibold py-2 px-4 rounded-2xl mt-6">
+                        Iniciar Sesión
+                    </button>
+                </div>
+                <?php if (isset($loginError)): ?>
+                    <p class="text-center text-red-600 text-sm font-semibold mt-4"><?= htmlspecialchars($loginError) ?></p>
+                <?php endif; ?>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="mt-2 text-sm text-gray-600">
+                    ¿Nuevo aquí?
+                    <a href="#" class="text-red-500 hover:underline">Regístrate</a>
+                </p>
             </div>
         </div>
-    </div>
-    <br><br>
+    </section>
 
+    <br><br>
     <!-- FOOTER -->
     <footer class="w-full bg-gray-200 text-white py-8 rounded-2xl">
         <div class="max-w-7xl mx-auto px-6">
@@ -172,7 +166,6 @@
             </div>
         </div>
     </footer>
-    <script src="./js/script_dishes.js"></script>
 </body>
 
 </html>

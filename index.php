@@ -1,12 +1,18 @@
 <?php
-session_start();
-include_once 'app/controllers/DishController.php';
+include_once 'app/controllers/dishController.php';
+include_once 'app/controllers/userController.php';
 include_once 'app/helpers/utilities.php';
 include_once 'app/models/DatabaseConnection.php';
 include_once 'app/models/Dish.php';
 include_once 'app/models/User.php';
 include_once 'app/models/Order.php';
 include_once 'app/models/Allergen.php';
+
+session_start();
+
+if (!isset($_SESSION['userLogged'])) {
+    $_SESSION['userLogged'] = null;
+}
 
 ob_start();
 $controller = new DishController();
@@ -81,27 +87,40 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     switch ($order) {
+        case 'login':
+            ob_clean();
+            include_once 'app/views/login.php';
+            break;
+        case 'logout':
+            ob_clean();
+            session_destroy();
+            header("Location: index.php");
+            exit;
+        case 'register':
+            ob_clean();
+             // AQUI SE SUPONE QUE SE INCLUIRÁ LA VISTA PARA REGISTRO CUANDO EXISTA
+            break;
         case 'admin':
             ob_clean();
-            require_once 'app\views\adminview.php';
+            require_once 'app/views/adminview.php';
             break;
         case 'usu':
             ob_clean();
             $posini = $_SESSION['posini'];
             $users = $db->getUsers(FPAG, $posini);
-            include_once 'app\views\adminview.php';
+            include_once 'app/views/adminview.php';
             break;
         case 'order':
             ob_clean();
             $posini = $_SESSION['posini'];
             $orders = $db->getOrders(FPAG, $posini);
-            include_once 'app\views\adminview.php';
+            include_once 'app/views/adminview.php';
             break;
         case 'dish':
             ob_clean();
             $posini = $_SESSION['posini'];
             $dishes = $db->getDishes(FPAG, $posini);
-            include_once 'app\views\adminview.php';
+            include_once 'app/views/adminview.php';
             break;
         case 'deleteU':
             ob_clean();
@@ -125,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $dishes = $controller->getDishesByFilters($selectedTypes, $selectedAllergens);
             ob_clean();
             include_once 'app/views/dishesView.php';
-            exit; 
+            exit;
         }
 
         //PARA CUANDO SE ACCEDE DESDE MAIN
@@ -162,8 +181,39 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $allergens = $controller->getAllergensByDishID($_GET['id']);
             ob_clean();
             include_once 'app/views/dishview.php';
-        } 
+        }
+    }
+}
+
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+   
+    if (isset($_POST['email']) && isset($_POST['password'])) {
+
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+       
+        $userController = new UserController();
+        $user = $userController->getUserByEmail($email);
+
+        if ($user && password_verify($password, $user->password)) {
+            $_SESSION['userLogged'] = $user; // Almacena el usuario en la sesión si el login es exitoso
+
+            // Redirige al inicio tras login exitoso
+            header("Location: index.php");
+            exit;
+        } else {
+            // Si el login falla, se muestra el formulario de nuevo con un error
+            $loginError = "Email o contraseña incorrectos";
+            ob_clean();
+            include_once 'app/views/login.php';
+        }
+    }else{
+            // Si el login falla, se muestra el formulario de nuevo con un error
+            $loginError = "Email o contraseña incorrectos";
+            ob_clean();
+            include_once 'app/views/login.php';
     }
 
 
-}
+
+} 

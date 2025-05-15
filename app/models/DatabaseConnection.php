@@ -200,7 +200,8 @@ class DatabaseConnection
         return $stmt->fetch();
     }
 
-    public function getDishById($id){
+    public function getDishById($id)
+    {
         $stmt = $this->dbh->prepare("SELECT * FROM public.dish WHERE id_dish = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Dish');
@@ -216,7 +217,16 @@ class DatabaseConnection
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
+
+    public function getUserByEmail($email)
+    {
+        $stmt = $this->dbh->prepare("SELECT * FROM public.user WHERE email = ?");
+        $stmt->execute([$email]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+        return $stmt->fetch(); // Devuelve un objeto User o false si no existe
+    }
+
+
 
 
     // ==== FILTRADO, ORDENAR ====
@@ -245,15 +255,15 @@ class DatabaseConnection
     // ==== REELACIONES? ====
 
 
-public function getAllergensByDish(int $dishId): array
-{
-    $sql = "SELECT a.name FROM public.dish_allergen da JOIN public.allergen a ON a.id_allergen = da.id_allergen WHERE da.id_dish = :dishId ORDER BY a.name";
-    $stmt = $this->dbh->prepare($sql);
-    $stmt->bindParam(':dishId', $dishId, PDO::PARAM_INT);
-    $stmt->execute();
-    
-    return $stmt->fetchAll(PDO::FETCH_COLUMN);
-}
+    public function getAllergensByDish(int $dishId): array
+    {
+        $sql = "SELECT a.name FROM public.dish_allergen da JOIN public.allergen a ON a.id_allergen = da.id_allergen WHERE da.id_dish = :dishId ORDER BY a.name";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindParam(':dishId', $dishId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 
     public function getOrderDishes($orderId)
     {

@@ -1,7 +1,7 @@
 <?php
 
-include_once 'app\models\Order.php';
-include_once 'app\models\DatabaseConnection.php';
+include_once 'app/models/Order.php';
+include_once 'app/models/DatabaseConnection.php';
 
 class OrderController{
 
