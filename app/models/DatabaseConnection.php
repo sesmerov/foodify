@@ -226,6 +226,14 @@ class DatabaseConnection
         return $stmt->fetch(); // Devuelve un objeto User o false si no existe
     }
 
+    public function getDishesByIds(array $ids) {
+    if (empty($ids)) return [];
+
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+    $stmt = $this->dbh->prepare("SELECT * FROM dish WHERE id_dish IN ($placeholders)");
+    $stmt->execute($ids);
+    return $stmt->fetchAll(PDO::FETCH_CLASS, 'Dish');
+}
 
 
 

@@ -19,34 +19,33 @@
                 <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
                 <div>
                     <form action="" class="flex space-x-5">
-                        <?php 
-                            if ($_SESSION['userLogged'] != null) {
-                                switch ($_SESSION['userLogged']->role) {
-                                    case 'ADMIN':
-                                        echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
-                                        break;
-                                    case 'CLIENTE':
-                                        echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
-                                        break;
-                                    case 'COCINA':
-                                        echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
-                                        break;
-                                    default:
-                                        # code...
-                                        break;
-                                }
-
-                            } else {
-                                echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
-                                echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            switch ($_SESSION['userLogged']->role) {
+                                case 'ADMIN':
+                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
+                                    break;
+                                case 'CLIENTE':
+                                    echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    break;
+                                case 'COCINA':
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    break;
+                                default:
+                                    # code...
+                                    break;
                             }
+                        } else {
+                            echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
+                            echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
+                        }
                         ?>
-                        <button class="nav-button text-sm" name="order"><i class="fas fa-shopping-cart"></i> Carrito</button>
-                        <?php 
-                            if ($_SESSION['userLogged'] != null) {
-                               echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
-                            }
-                            ?>    
+                        <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
+                        }
+                        ?>
                     </form>
                 </div>
             </div>
@@ -207,7 +206,7 @@
         </div>
         <div class="text-center mt-8">
 
-            <a href="index.php?all-dishes"> 
+            <a href="index.php?all-dishes">
                 <button class="bg-white text-red-600 font-semibold py-2 px-6 rounded-lg hover:bg-red-50 transition-colors duration-300">Ver todos los platos</button>
             </a>
 
