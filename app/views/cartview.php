@@ -94,7 +94,7 @@
                         </div>
                         <form method="GET" action="index.php?">
                             <input type="hidden" name="order" value="removeFromCart">
-                            <input type="hidden" name="id_dish" value="<?= $dish->id_dish ?>">
+                            <input type="hidden" name="id_dish" value="<?= $dish->id_dish?>">
                             <button type="submit" class="text-red-500 hover:text-red-700" title="Eliminar del carrito">
                                 <a href="index.php?order=removeFromCart&id=<?= $dish->id_dish ?>" title="Eliminar del carrito" class="text-red-500 hover:text-red-700">
                                     <i class="fas fa-trash-alt"></i>
@@ -114,9 +114,14 @@
             </div>
         </div>
         <div class="flex justify-center mt-6">
-            <button class="w-48 bg-white border-2 border-red-500 text-red-500 font-bold py-2 px-6 rounded-3xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out transform">
-                Realizar Pedido
+        <form method="POST" action="index.php">
+         <input type="hidden" name="ord" value="submitcart">
+        <input type="hidden" name="date" value="<?= date('Y-m-d H:i:s.u') ?>">
+        <input type="hidden" name="total" value="<?= $total ?>">
+        <button type="submit" class="w-48 bg-white border-2 border-red-500 text-red-500 font-bold py-2 px-6 rounded-3xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out transform">
+               Realizar Pedido  
             </button>
+            </form>
         </div> <br>
     </div>
 

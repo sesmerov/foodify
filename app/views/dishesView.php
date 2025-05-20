@@ -23,7 +23,7 @@
                         if ($_SESSION['userLogged'] != null) {
                             switch ($_SESSION['userLogged']->role) {
                                 case 'ADMIN':
-                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
                                     break;
                                 case 'CLIENTE':
                                     echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
@@ -40,7 +40,7 @@
                             echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
                         }
                         ?>
-                        <button class="nav-button text-sm" name="order"><i class="fas fa-shopping-cart"></i> Carrito</button>
+                        <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
                         <?php
                         if ($_SESSION['userLogged'] != null) {
                             echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
@@ -58,7 +58,6 @@
             <div class=" w-full md:w-3/4 lg:w-2/3 xl:w-1/2"><br><br><br>
                 <h1 class="text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
                 <p class="text-white mt-4 text-base sm:text-lg">En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.</p>
-                <button class="hero-button mt-6">Registrarse / Iniciar sesión</button>
             </div>
         </div>
     </div>
@@ -100,7 +99,7 @@
 
             <!-- FORMULARIO DE FILTROS -->
             <form method="GET" action="index.php?all-dishes" class="flex space-x-2 relative z-50">
-
+                <input type="search"   class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md w-60"  name="searcher" id="searcher" placeholder="Buscar...">
                 <!-- Fix para que se envie all-dishes y allergen[] al hacer submit -->
                 <input type="hidden" name="all-dishes">
                 <input type="hidden" name="allergen[]">
@@ -201,6 +200,13 @@
                             class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300">
                             Detalles
                         </a>
+                    </div>
+                    <!--div de cantidad añadida-->
+                    <div>
+                        <?php if (isset($_SESSION["cart"][$dish->id_dish])) : ?>
+                            <p class="text-center text-gray-600 mt-2"> <button class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300" onclick="reducirPlato(<?php echo $dish->id_dish; ?>)"> - </button> Cantidad: <?php echo $_SESSION["cart"][$dish->id_dish] ?> <button onclick="aumentarPlato(<?php echo $dish->id_dish; ?>)" class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300">+</button> </p>
+
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>

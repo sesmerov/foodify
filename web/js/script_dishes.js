@@ -39,3 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+function reducirPlato(id) {
+    fetch(`index.php?order=removeFromCart&id_dish=${id}`, {
+        method: "GET"
+    }).then(() => {
+        location.reload();
+    });
+}
+
+function aumentarPlato(id) {
+     fetch(`index.php?order=addToCart&id_dish=${id}`, {
+        method: "GET"
+    }).then(() => {
+        location.reload();
+    });
+}
