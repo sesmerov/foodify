@@ -7,7 +7,8 @@ CREATE TYPE role_enum AS ENUM ('CLIENTE', 'ADMIN', 'COCINERO');
 -- Crear el tipo ENUM para 'status' en la tabla 'order'
 CREATE TYPE status_enum AS ENUM ('PENDIENTE', 'EN PROCESO', 'FINALIZADO');
 
-
+-- Crear el tipo ENUM para 'type' en la tabla 'dish'
+CREATE TYPE dish_type_enum AS ENUM ('CARNE', 'PESCADO', 'VEGETARIANO', 'VEGANO', 'OTROS');
 
 -- Table 'user'
 CREATE TABLE "user" (
@@ -31,7 +32,7 @@ CREATE TABLE dish (
     id_dish SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     price DECIMAL(6,2) NOT NULL,
-    type VARCHAR(50) NOT NULL, 
+    type dish_type_enum NOT NULL, 
     details VARCHAR(255)
 );
 
