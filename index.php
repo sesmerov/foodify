@@ -101,7 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         case 'profile':
             ob_clean();
             $user =  $_SESSION['userLogged'];
-            $user->password = decryptPassword($user->password);
             include_once 'app/views/UserCustom.php';
             break;
         case 'login':
@@ -191,7 +190,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         case 'modU':
             ob_clean();
             $user = $users->getUserById($_GET['id']);
-            $user->password = decryptPassword($user->password);
             include_once 'app/views/UserCustom.php';
             break;
 
@@ -315,7 +313,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $userController = new UserController();
         $user = $userController->getUserByEmail($email);
 
-        if ($user && encryptPassword($user->password)) {
+        if ($user && password_verify($password, $user->password)) {
             $_SESSION['userLogged'] = $user;
 
             // Redirige al inicio tras login exitoso

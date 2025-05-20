@@ -13,7 +13,7 @@ public function adduser($first_name, $last_name, $email, $address, $password, $r
     $user->__set('last_name', $last_name);
     $user->__set('email', $email);
     $user->__set('address', $address);
-    $user->__set('password', encryptPassword($password));
+    $user->__set('password', password_hash($password, PASSWORD_DEFAULT));
     $user->__set('role', $role);
 
     $db = DatabaseConnection::getModel();
@@ -42,7 +42,7 @@ public function adduser($first_name, $last_name, $email, $address, $password, $r
     $user->__set('last_name',$last_name);
     $user->__set('email', $email);
     $user->__set('address',$address);
-    $user->__set('password',encryptPassword($password));
+    $user->__set('password',password_hash($password, PASSWORD_DEFAULT));
     $user->__set('role', $role);
 
     $db->UpdateUser($user);

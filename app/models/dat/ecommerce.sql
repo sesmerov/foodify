@@ -68,16 +68,16 @@ CREATE TABLE dish_allergen (
 
 -- Inserting data for 'user'
 INSERT INTO "user" (first_name, password, last_name, email, address, role) VALUES
-('Carlos', '4oUR/adwMezTvOcRj/1poE9srk2MOJSwmWly/4Uuv3c=', 'Pérez', 'carlos.perez@example.com', 'Calle Falsa 123, 1ºA, 28001 Madrid, Madrid', 'CLIENTE'),
-('Ana', 'LgUL0imrlH3J04XVYA0AajRFtrBM4ljIzeZrMzAMnPE=', 'Gómez', 'ana.gomez@example.com', 'Avenida Libertad 456, 2ºB, 08001 Barcelona, Barcelona', 'CLIENTE'),
-('Luis', 'ao3wygufhGHBziZ1/Bn9YTzNat61cFpQaHwMw+vbM00=', 'Martínez', 'luis.martinez@example.com', 'Calle Gran Via 789, 1º, 46001 Valencia, Valencia', 'CLIENTE'),
-('Marta', 'SHWL/pb5gQf9blkeEnlqPpKbnhvo4ln6xoRPGxIWM1E=', 'Rodríguez', 'marta.rodriguez@example.com', 'Calle de la Paz 101, 3ºC, 29001 Málaga, Málaga', 'CLIENTE'),
-('Jorge', '3Nztm96sc4XoG+shymvbecilkEMaKZurieT9yOWijqk=', 'Sánchez', 'jorge.sanchez@example.com', 'Plaza Mayor 202, 4ºA, 41001 Sevilla, Sevilla', 'CLIENTE'),
-('Pedro', 'FrW5WhRjNfvMH8UOmOwqUpQvplOm/Mk+iBxE78jjxE4=', 'López', 'pedro.lopez@example.com', 'Calle del Sol 303, 2ºD, 28002 Madrid, Madrid', 'CLIENTE'),
-('Laura', 'ZVAAcXmUXQwoZEhMPqafGyGQBqpzS4cNHetXF9qhej0=', 'Hernández', 'laura.hernandez@example.com', 'Callejón del Agua 404, 1ºB, 08002 Barcelona, Barcelona', 'CLIENTE'),
-('Carlos', 'HCKNHjkqbcTjhaGJ4j/Jbp+4knStLgNiQYJHKfxu+8k=', 'Torres', 'carlos.torres@example.com', 'Avenida de la Constitución 505, 5ºA, 50001 Zaragoza, Zaragoza', 'CLIENTE'),
-('Raúl', 'bJuqXgvGJ2vBORNBTgfO3NkPEy5Jh3m812Y3dsKcaRk=', 'Díaz', 'raul.diaz@example.com', 'Calle de las Flores 606, 3ºC, 41002 Sevilla, Sevilla', 'CLIENTE'),
-('Pedro', '8xdWGYlaIQTgtAEPVMMtmNKIPUbbm//kL1kvd76XF8E=', 'González', 'pedro.gonzalez@admin.com', 'Avenida de la Administración 123, 6ºA, 28003 Madrid, Madrid', 'ADMIN'); 
+('Carlos', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Pérez', 'carlos.perez@example.com', 'Calle Falsa 123, 1ºA, 28001 Madrid, Madrid', 'CLIENTE'),
+('Ana', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Gómez', 'ana.gomez@example.com', 'Avenida Libertad 456, 2ºB, 08001 Barcelona, Barcelona', 'CLIENTE'),
+('Luis', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Martínez', 'luis.martinez@example.com', 'Calle Gran Via 789, 1º, 46001 Valencia, Valencia', 'CLIENTE'),
+('Marta', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Rodríguez', 'marta.rodriguez@example.com', 'Calle de la Paz 101, 3ºC, 29001 Málaga, Málaga', 'CLIENTE'),
+('Jorge', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Sánchez', 'jorge.sanchez@example.com', 'Plaza Mayor 202, 4ºA, 41001 Sevilla, Sevilla', 'CLIENTE'),
+('Pedro', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'López', 'pedro.lopez@example.com', 'Calle del Sol 303, 2ºD, 28002 Madrid, Madrid', 'CLIENTE'),
+('Laura', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Hernández', 'laura.hernandez@example.com', 'Callejón del Agua 404, 1ºB, 08002 Barcelona, Barcelona', 'CLIENTE'),
+('Carlos', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Torres', 'carlos.torres@example.com', 'Avenida de la Constitución 505, 5ºA, 50001 Zaragoza, Zaragoza', 'CLIENTE'),
+('Raúl', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Díaz', 'raul.diaz@example.com', 'Calle de las Flores 606, 3ºC, 41002 Sevilla, Sevilla', 'CLIENTE'),
+('Pedro', '$2y$10$gF5.GPZHVDjLKR1LPP6PjOH0UKnzKUGttenp2teu74jVwEqW.dkaW', 'González', 'pedro.gonzalez@admin.com', 'Avenida de la Administración 123, 6ºA, 28003 Madrid, Madrid', 'ADMIN'); 
 -- password admin: admin123
 -- password users: usuario
 
