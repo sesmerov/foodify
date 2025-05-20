@@ -7,9 +7,12 @@ include_once 'app/models/Dish.php';
 include_once 'app/models/User.php';
 include_once 'app/models/Order.php';
 include_once 'app/models/Allergen.php';
+include_once 'app/controllers/OrderController.php';
 
 session_start();
-
+if (!isset($id_dish)) {
+    $id_dish = null;
+}
 if (!isset($_SESSION['userLogged'])) {
     $_SESSION['userLogged'] = null;
 }
@@ -21,6 +24,10 @@ if (!isset($_SESSION['cart'])) {
 ob_start();
 $controller = new DishController();
 $dishes = $controller->showRandomDishes();
+$users = new userController();
+$orders = new orderController();
+
+
 require_once 'app/views/main.php'; // Renderiza la vista principal
 
 define('FPAG', 5);
@@ -91,6 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     switch ($order) {
+        case 'profile':
+            ob_clean();
+            $user =  $_SESSION['userLogged'];
+            $user->password = decryptPassword($user->password);
+            include_once 'app/views/UserCustom.php';
+            break;
         case 'login':
             ob_clean();
             include_once 'app/views/login.php';
@@ -102,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             exit;
         case 'register':
             ob_clean();
-            // AQUI SE SUPONE QUE SE INCLUIRÁ LA VISTA PARA REGISTRO CUANDO EXISTA
+            include_once 'app/views/newUser.php';
             break;
         case 'cart':
             ob_clean();
@@ -121,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             } else {
                 $_SESSION['cart'][$id_dish] = 1;
             }
-            header("Location: " . $_SERVER['HTTP_REFERER']); // Redirige a lla misma página desde la que se añade a carrito
+            header("Location: " . $_SERVER['HTTP_REFERER']); // Redirige a la misma página desde la que se añade a carrito
             exit;
         case 'addToCartAllDishes':
             ob_clean();
@@ -147,9 +160,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             header("Location: " . $_SERVER['HTTP_REFERER']);
             exit;
 
+
         case 'admin':
             ob_clean();
-            require_once 'app/views/adminview.php';
+            if ($_SESSION['userLogged'] == null) {
+                include_once 'app/views/login.php';
+            } else {
+                require_once 'app/views/adminview.php';
+            }
             break;
         case 'usu':
             ob_clean();
@@ -169,9 +187,57 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $dishes = $db->getDishes(FPAG, $posini);
             include_once 'app/views/adminview.php';
             break;
+
+        case 'modU':
+            ob_clean();
+            $user = $users->getUserById($_GET['id']);
+            $user->password = decryptPassword($user->password);
+            include_once 'app/views/UserCustom.php';
+            break;
+
         case 'deleteU':
             ob_clean();
+            $users->DeleteUser($_GET['id']);
+            break;
 
+        case 'detailsD':
+            ob_clean();
+            $dish = $controller->getDishById($_GET['id']);
+            $allergens = $controller->getAllergensByDishID($_GET['id']);
+            include_once 'app/views/dishview.php';
+            break;
+
+        case 'modD':
+            ob_clean();
+            $dish  = $controller->getDishById($_GET['id']);
+            $allergens = $controller->getAllergensByDishID($_GET['id']);
+            include_once 'app/views/moddish.php';
+            break;
+
+        case 'deleteD':
+            ob_clean();
+            $dish = $controller->DeleteDish($_GET['id']); //no se por que pone eso pero funciona la funcion idk 
+            break;
+
+
+        case 'detailsO':
+            ob_clean();
+            $order = $orders->getOrderById($_GET['id']);
+            $plates = $orders->getOrderDishes($_GET['id']);
+            include_once 'app/views/detailsview.php';
+            break;
+
+
+        case 'mod':
+            ob_clean();
+            $order = $orders->getOrderById($_GET['id']);
+            $plates = $orders->getOrderDishes($_GET['id']);
+            include_once 'app/views/modDetails.php';
+            break;
+
+        case 'deleteO':
+            ob_clean();
+            $orders->DeleteOrder($_GET['id']);
             break;
     }
 
@@ -181,6 +247,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $types = $controller->getAllDishTypes();
         $allergens = $controller->getAllAllergens();
 
+        if (isset($_GET["searcher"])) {
+            $dishes  =  $controller->getDishesByName($_GET["searcher"]);
+            ob_clean();
+            include_once 'app/views/dishesView.php';
+            exit;
+        }
 
         //PARA CUANDO EL USUARIO FILTRA POR TIPO Y/O ALERGENO
         if (isset($_GET['allergen']) && isset($_GET['type'])) {
@@ -193,6 +265,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             include_once 'app/views/dishesView.php';
             exit;
         }
+
 
         //PARA CUANDO SE ACCEDE DESDE MAIN
         if (isset($_GET['type'])) {
@@ -242,8 +315,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $userController = new UserController();
         $user = $userController->getUserByEmail($email);
 
-        if ($user && password_verify($password, $user->password)) {
-            $_SESSION['userLogged'] = $user; // Almacena el usuario en la sesión si el login es exitoso
+        if ($user && encryptPassword($user->password)) {
+            $_SESSION['userLogged'] = $user;
 
             // Redirige al inicio tras login exitoso
             header("Location: index.php");
@@ -259,5 +332,100 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $loginError = "Email o contraseña incorrectos";
         ob_clean();
         include_once 'app/views/login.php';
+    }
+
+
+    if (isset($_POST['ord'])) {
+        $ord = $_POST['ord'];
+    } else {
+        $ord = null;
+    }
+
+    switch ($ord) {
+        case 'modpostD':
+            ob_clean();
+            $controller->updateDish($_POST['id_dish'], $_POST['name'], $_POST['price'], $_POST['type'], $_POST['details'], $_POST['allergens'] ?? [], $_FILES['image'] ?? null);
+            header("Location: index.php?order=dish");
+
+            break;
+
+        case 'submitcart':
+            ob_clean();
+            $user = $_SESSION['userLogged'];
+            if ($user) {
+                $ids = array_keys($_SESSION['cart']);
+                $cartDishes = $controller->getDishesByIds($ids);
+                $date = $_POST['date'];
+                $total = $_POST['total'];
+                $orders->AddOrder($date, $total, $user->address, "PENDIENTE", $user->id_user);
+                $_SESSION['cart'] = [];
+            }
+            header("Location: index.php");
+            break;
+
+
+        case 'modpostU':
+            ob_clean();
+            $user = $_SESSION['userLogged'];
+            $users->UpdateUser($_POST['id'], $_POST['nuevo-nombre'], $_POST['nuevo-apellido'], $_POST['nuevo-email'], $_POST['nueva-direccion'], $_POST['nueva-contrasena'], $_POST['role']);
+            if ($user->role == "ADMIN") {
+                header("Location: index.php?order=usu");
+            } else {
+                header("Location: index.php");
+            }
+
+
+            break;
+
+        case 'register':
+            ob_clean();
+            $registerError = null;
+
+
+            if ($_POST['contrasena'] !== $_POST['contrasena2']) {
+                $registerError = "Las contraseñas no coinciden";
+                include_once 'app/views/newUser.php';
+                break;
+            }
+
+
+            $nombre = htmlspecialchars($_POST['nombre']);
+            $apellido = htmlspecialchars($_POST['apellido']);
+            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            $direccion = htmlspecialchars($_POST['direccion']);
+            $contrasena = $_POST['contrasena'];
+            $role = $_POST['role'] ?? 'CLIENTE';
+
+
+            $result = $users->adduser($nombre, $apellido, $email, $direccion, $contrasena, $role);
+
+
+            if ($result === true) {
+
+                $user = $users->getUserByEmail($email);
+                if ($user) {
+                    $_SESSION['userLogged'] = $user;
+                    header("Location: index.php");
+                    exit;
+                }
+                $registerError = "Error al iniciar sesión automática";
+            } elseif ($result === 'email_duplicado') {
+                $registerError = "Este correo electrónico ya está registrado";
+            } else {
+                $registerError = "Error en el registro. Intente nuevamente.";
+            }
+
+
+            include_once 'app/views/newUser.php';
+            break;
+
+        case 'updateOrder':
+            $id_order = $_POST['id_order'];
+            $direccion = $_POST['direccion'];
+            $estado = $_POST['estado'];
+            $orders->updateOrder($id_order, $direccion, $estado);
+            header("Location: index.php?order=order");
+
+            break;
     }
 }

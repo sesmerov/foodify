@@ -23,10 +23,10 @@
                         if ($_SESSION['userLogged'] != null) {
                             switch ($_SESSION['userLogged']->role) {
                                 case 'ADMIN':
-                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
                                     break;
                                 case 'CLIENTE':
-                                    echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
                                     break;
                                 case 'COCINA':
                                     echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
@@ -59,7 +59,10 @@
             <p class="text-white mt-4">En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con
                 ingredientes frescos y de la más alta calidad. ¡Deja que nosotros cocinemos por ti!</p>
             <br><br>
+            <?php if( $_SESSION['userLogged'] == null):  ?>
             <button class="hero-button">Registrarse / Iniciar sesión</button>
+            <?php endif; ?>
+            
         </div>
     </div>
     <br><br>
