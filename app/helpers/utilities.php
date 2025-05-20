@@ -13,22 +13,3 @@ function getClientImage($id)
 
     return $base64Image;
 }
-
-
-
-function encryptPassword($password ) {
-    $key = 'paquito69';
-    $ivlen = openssl_cipher_iv_length($cipher = "AES-256-CBC");
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    $encrypted = openssl_encrypt($password, $cipher, $key, OPENSSL_RAW_DATA, $iv);
-    return base64_encode($iv . $encrypted);
-}
-
-function decryptPassword($encryptedPassword) {
-    $key = 'paquito69';
-    $c = base64_decode($encryptedPassword);
-    $ivlen = openssl_cipher_iv_length($cipher = "AES-256-CBC");
-    $iv = substr($c, 0, $ivlen);
-    $encrypted = substr($c, $ivlen);
-    return openssl_decrypt($encrypted, $cipher, $key, OPENSSL_RAW_DATA, $iv);
-}
