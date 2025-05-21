@@ -361,15 +361,15 @@ class DatabaseConnection
 
     // ==== ADDS ====
 
-    public function addDish($dish)
+     public function addDish($dish)
     {
         $stmt = $this->dbh->prepare("INSERT INTO public.dish (name, price, type, details) VALUES (:name, :price, :type, :details)");
-        $stmt->bindParam(':name', $dish->name);
-        $stmt->bindParam(':price', $dish->price);
-        $stmt->bindParam(':type', $dish->type);
-        $stmt->bindParam(':details', $dish->details);
+        $stmt->bindParam(':name', $dish->__get('name') );
+        $stmt->bindParam(':price', $dish->__get('price'));
+        $stmt->bindParam(':type', $dish->__get('type'));
+        $stmt->bindParam(':details', $dish->__get('details'));
         $stmt->execute();
-        return $stmt->rowCount() === 1;
+        return $this->dbh->lastInsertId();
     }
 
     public function registerUser($user)
@@ -441,12 +441,27 @@ class DatabaseConnection
 
     // ==== DELETE====
 
-    public function deleteDish($id)
+      public function deleteDish($id)
     {
-        $stmt = $this->dbh->prepare("DELETE FROM public.dish WHERE id_dish = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount() === 1;
+        try {
+            $this->dbh->beginTransaction();
+    
+            $stmtAllergen = $this->dbh->prepare("DELETE FROM public.dish_allergen WHERE id_dish = :id");
+            $stmtAllergen->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmtAllergen->execute();
+    
+            $stmtDish = $this->dbh->prepare("DELETE FROM public.dish WHERE id_dish = :id");
+            $stmtDish->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmtDish->execute();
+    
+            $this->dbh->commit();
+            return $stmtDish->rowCount() === 1;
+            
+        } catch (PDOException $e) {
+            $this->dbh->rollBack();
+            error_log("Error deleting dish: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function deleteUser($id)
