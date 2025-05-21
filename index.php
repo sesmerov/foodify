@@ -160,6 +160,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             exit;
 
 
+
+
+        case 'adddish':
+            ob_clean();
+            include_once 'app/views/reigsterdish.php';
+            break;
+
         case 'admin':
             ob_clean();
             if ($_SESSION['userLogged'] == null) {
@@ -423,6 +430,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $estado = $_POST['estado'];
             $orders->updateOrder($id_order, $direccion, $estado);
             header("Location: index.php?order=order");
+
+            break;
+
+
+        case 'addpostD':
+
+            if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']->role !== 'ADMIN') {
+                header("Location: index.php?order=login");
+                exit;
+            } else {
+                $controller->addDish($_POST["name"],$_POST["price"],$_POST["type"],$_POST["details"],$_POST["allergens"] ?? [],$_FILES['image'] ?? null);
+                header("Location: index.php?order=admin");
+            }
+
 
             break;
     }

@@ -138,4 +138,38 @@ public function updateDish($id, $name, $price, $type, $details, $allergens, $ima
         $db->addAllergentoaDish($allergenId, $id);
     }
 }
+
+public function addDish($name, $price, $type, $details, $allergens, $imageFile = null) {
+    $db = DatabaseConnection::getModel();
+    $dish = new Dish();
+
+    $dish->__set('name', $name);
+    $dish->__set('price', $price);
+    $dish->__set('type', $type);
+    $dish->__set('details', $details);
+    $id = $db->addDish($dish);
+
+    if ($imageFile && $imageFile['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = 'app/uploads/dishes/';
+        $targetFile = $uploadDir.$id.'.webp';
+
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        $detectedType = mime_content_type($imageFile['tmp_name']);
+
+        if (in_array($detectedType, $allowedTypes)) {
+            if ($detectedType === 'image/webp') {
+                move_uploaded_file($imageFile['tmp_name'], $targetFile);
+            } else {
+                $image = imagecreatefromstring(file_get_contents($imageFile['tmp_name']));
+                imagewebp($image, $targetFile, 80);
+                imagedestroy($image);
+            }
+        }
+    }
+
+    foreach ($allergens as $allergenId) {
+        $db->addAllergentoaDish($allergenId, $id);
+    }
+}
+
 }

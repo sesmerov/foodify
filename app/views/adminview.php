@@ -33,6 +33,7 @@
         <button type="submit" name="order" value="usu" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs"> Usuarios</button>
         <button type="submit" name="order" value="order" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Pedidos</button>
         <button type="submit" name="order" value="dish" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs"> Platos </button>
+        <button type="submit" name="order" value="adddish" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs"> Añadir un plato </button>
       </form>
     </div>
   </div>
