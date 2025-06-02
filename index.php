@@ -175,6 +175,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 require_once 'app/views/adminview.php';
             }
             break;
+            
+                case 'kitchen':
+                    ob_clean();
+            if ($_SESSION['userLogged'] == null || $_SESSION['userLogged']->role !== 'COCINERO') {
+                include_once 'app/views/login.php';
+            } else {
+                require_once 'app/views/adminview.php';
+            }
+            break;
+
         case 'usu':
             ob_clean();
             $posini = $_SESSION['posini'];

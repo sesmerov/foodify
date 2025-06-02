@@ -26,7 +26,14 @@
 
   <div class="bg-custom-red w-full py-8">
     <div class="max-w-screen-md mx-auto px-6">
-      <p class="text-white text-center mb-6"> Bienvenido al panel de administración de Foodify. Desde aquí puedes gestionar usuarios, pedidos y platos.</p>
+
+      <?php if($_SESSION['userLogged']->role=='ADMIN') :?>
+        <h2 class="text-2xl font-bold text-white mb-4">Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
+         <p class="text-white text-center mb-6"> Bienvenido al panel de administración de Foodify. Desde aquí puedes gestionar usuarios, pedidos y platos.</p>
+      <?php else:?>
+        <h2 class="text-2xl font-bold text-white mb-4">Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
+        <p>Bienvenido a la cocina aqui puedes gestionar los pedidos de la Cocina</p>
+      <?php endif;?>
 
     <!-- BOTONES -->
       <form method="get" action="" class="flex space-x-4 justify-center">
