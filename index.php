@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         case 'deleteD':
             ob_clean();
-            $dish = $controller->DeleteDish($_GET['id']); //no se por que pone eso pero funciona la funcion idk 
+            $dish = $controller->DeleteDish($_GET['id']); 
             break;
 
 
