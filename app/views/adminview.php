@@ -26,15 +26,28 @@
 
   <div class="bg-custom-red w-full py-8">
     <div class="max-w-screen-md mx-auto px-6">
-      <p class="text-white text-center mb-6"> Bienvenido al panel de administración de Foodify. Desde aquí puedes gestionar usuarios, pedidos y platos.</p>
+      <?php if($_SESSION['userLogged']->role=='ADMIN') :?>
+        <h2 class="text-2xl font-bold text-white mb-4">Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
+         <p class="text-white text-center mb-6"> Bienvenido al panel de administración de Foodify. Desde aquí puedes gestionar usuarios, pedidos y platos.</p>
+      <?php else:?>
+        <h2 class="text-2xl font-bold text-white mb-4">Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
+        <p>Bienvenido a la cocina aqui puedes gestionar los pedidos de la Cocina</p>
+      <?php endif;?>
+     
 
     <!-- BOTONES -->
+     <?php if($_SESSION['userLogged']->role=='ADMIN') :?>
       <form method="get" action="" class="flex space-x-4 justify-center">
         <button type="submit" name="order" value="usu" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs"> Usuarios</button>
         <button type="submit" name="order" value="order" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Pedidos</button>
         <button type="submit" name="order" value="dish" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs"> Platos </button>
         <button type="submit" name="order" value="adddish" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs"> Añadir un plato </button>
       </form>
+      <?php else:?>
+        <form method="get" action="" class="flex space-x-4 justify-center">
+          <button type="submit" name="order" value="order" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Pedidos</button>
+        </form>
+      <?php endif;?>
     </div>
   </div>
 
