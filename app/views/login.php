@@ -26,9 +26,9 @@
                                         echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
                                         break;
                                     case 'CLIENTE':
-                                        echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                        echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
                                         break;
-                                    case 'COCINA':
+                                    case 'COCINERO':
                                         echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
                                         break;
                                     default:
@@ -41,7 +41,7 @@
                                 echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
                             }
                         ?>
-                        <button class="nav-button text-sm" name="order"><i class="fas fa-shopping-cart"></i> Carrito</button>
+                        <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
                         <?php 
                             if ($_SESSION['userLogged'] != null) {
                                echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
@@ -93,7 +93,7 @@
             <div class="mt-4 text-center">
                 <p class="mt-2 text-sm text-gray-600">
                     ¿Nuevo aquí?
-                    <a href="#" class="text-red-500 hover:underline">Regístrate</a>
+                    <a href="index.php?order=register" class="text-red-500 hover:underline">Regístrate</a>
                 </p>
             </div>
         </div>

@@ -26,9 +26,9 @@
                                     echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
                                     break;
                                 case 'CLIENTE':
-                                    echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
                                     break;
-                                case 'COCINA':
+                                case 'COCINERO':
                                     echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
                                     break;
                                 default:
@@ -52,46 +52,18 @@
         </div>
     </nav>
 
-    <!-- INTRODUCCION -->
-    <div class=" hero flex items-center h-96">
-        <div class="text-left p-9 rounded-lg w-full max-w-screen-xl mx-auto">
-            <div class=" w-full md:w-3/4 lg:w-2/3 xl:w-1/2"><br><br><br>
+    <!-- INTRODUCCIÓN -->
+    <div class="hero flex items-center justify-center h-96">
+        <div class="text-center p-9 rounded-lg w-full max-w-screen-xl mx-auto">
+            <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 mx-auto">
+                <br><br><br>
                 <h1 class="text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
-                <p class="text-white mt-4 text-base sm:text-lg">En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.</p>
+                <p class="text-white mt-4 text-base sm:text-lg">
+                    En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.
+                </p>
             </div>
         </div>
     </div>
-
-
-    <!-- SECCION COMO FUNCIONA
-    <div class="w-full bg-white py-12">
-        <div class="text-center">
-            <h2 class="text-2xl font-semibold mb-10 mt-7 pb-7">COMO FUNCIONA</h2>
-            <div class="flex justify-center gap-14">
-                <div class="text-center">
-                    <img src="rec/tails.jpeg" alt="Imagen 3" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
-                    <h3 class="how-it-works-title">Disfruta en casa</h3>
-                    <p class="text-gray-600 mb-0"> tu comida .</p>
-                </div>
-                <div class="text-center">
-                    <img src="rec/pato.jpeg" alt="Imagen 1" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
-                    <h3 class="how-it-works-title">Elige tu menú</h3>
-                    <p class="text-gray-600 mb-0"> tus pl</p>
-                </div>
-                <div class="text-center">
-                    <img src="rec/erizo.jpeg" alt="Imagen 2" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
-                    <h3 class="how-it-works-title">Realiza tu pedido</h3>
-                    <p class="text-gray-600 mb-0"> tu  en</p>
-                </div>
-                <div class="text-center">
-                    <img src="rec/tails.jpeg" alt="Imagen 3" class="w-48 h-48 object-cover rounded-full mb-4 mx-auto">
-                    <h3 class="how-it-works-title">Disfruta en casa</h3>
-                    <p class="text-gray-600 mb-0"> tu comida .</p>
-                </div>
-            </div>
-        </div>
-    </div><br><br><br> -->
-
 
     <div class="max-w-6xl mx-auto">
         <div class="flex items-center justify-between">
@@ -99,7 +71,7 @@
 
             <!-- FORMULARIO DE FILTROS -->
             <form method="GET" action="index.php?all-dishes" class="flex space-x-2 relative z-50">
-                <input type="search"   class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md w-60"  name="searcher" id="searcher" placeholder="Buscar...">
+                <input type="search" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md w-60" name="searcher" id="searcher" placeholder="Buscar...">
                 <!-- Fix para que se envie all-dishes y allergen[] al hacer submit -->
                 <input type="hidden" name="all-dishes">
                 <input type="hidden" name="allergen[]">
@@ -122,6 +94,9 @@
                                 <?= ucfirst(strtolower($type)) ?>
                             </label>
                         <?php endforeach; ?>
+                        <button type="button" onclick="toggleAllCheckboxes('type[]',this)" class="bg-gray-300 text-gray-800 px-2 py-1 rounded-md w-full mb-2">
+                            Deseleccionar todo
+                        </button>
                         <button
                             id="close-tipo-comida"
                             type="button"
@@ -148,6 +123,9 @@
                                 <?= $allergen ?>
                             </label>
                         <?php endforeach; ?>
+                        <button type="button" onclick="toggleAllCheckboxes('allergen[]',this)" class="bg-gray-300 text-gray-800 px-2 py-1 rounded-md w-full mb-2">
+                            Seleccionar todo
+                        </button>
                         <button
                             id="close-alergenos"
                             type="button"
@@ -204,7 +182,7 @@
                     <!--div de cantidad añadida-->
                     <div>
                         <?php if (isset($_SESSION["cart"][$dish->id_dish])) : ?>
-                            <p class="text-center text-gray-600 mt-2"> <button class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300" onclick="reducirPlato(<?php echo $dish->id_dish; ?>)"> - </button> Cantidad: <?php echo $_SESSION["cart"][$dish->id_dish] ?> <button onclick="aumentarPlato(<?php echo $dish->id_dish; ?>)" class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300">+</button> </p>
+                            <p class="text-center text-gray-600 mt-2"> <button class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300" onclick="reducirPlato(<?php echo $dish->id_dish; ?>)"> - </button> Cantidad Añadida: <?php echo $_SESSION["cart"][$dish->id_dish] ?> <button onclick="aumentarPlato(<?php echo $dish->id_dish; ?>)" class="bg-white text-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-300">+</button> </p>
 
                         <?php endif; ?>
                     </div>
@@ -283,6 +261,18 @@
         </div>
     </footer>
     <script src="web/js/script_dishes.js"></script>
+    <script>
+        function toggleAllCheckboxes(name, buttonElement) {
+    const checkboxes = document.querySelectorAll(`input[name="${CSS.escape(name)}"]`);
+    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+    checkboxes.forEach(cb => cb.checked = !allChecked);
+
+    // Actualiza el texto del botón
+    if (buttonElement) {
+        buttonElement.textContent = allChecked ? "Seleccionar todo" : "Deseleccionar todo";
+    }
+}
+    </script>
 </body>
 
 </html>

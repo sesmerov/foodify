@@ -77,7 +77,7 @@ INSERT INTO "user" (first_name, password, last_name, email, address, role) VALUE
 ('Pedro', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'López', 'pedro.lopez@example.com', 'Calle del Sol 303, 2ºD, 28002 Madrid, Madrid', 'CLIENTE'),
 ('Laura', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Hernández', 'laura.hernandez@example.com', 'Callejón del Agua 404, 1ºB, 08002 Barcelona, Barcelona', 'CLIENTE'),
 ('Carlos', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Torres', 'carlos.torres@example.com', 'Avenida de la Constitución 505, 5ºA, 50001 Zaragoza, Zaragoza', 'CLIENTE'),
-('Raúl', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Díaz', 'raul.diaz@example.com', 'Calle de las Flores 606, 3ºC, 41002 Sevilla, Sevilla', 'CLIENTE'),
+('Raúl', '$2y$10$kQxdDHqdmxSp2RMnDHWqQutSgf.92upHYF7priOvlpiSYh67L7.4O', 'Díaz', 'raul.diaz@example.com', 'Calle de las Flores 606, 3ºC, 41002 Sevilla, Sevilla', 'COCINERO'),
 ('Pedro', '$2y$10$gF5.GPZHVDjLKR1LPP6PjOH0UKnzKUGttenp2teu74jVwEqW.dkaW', 'González', 'pedro.gonzalez@admin.com', 'Avenida de la Administración 123, 6ºA, 28003 Madrid, Madrid', 'ADMIN'); 
 -- password admin: admin123
 -- password users: usuario

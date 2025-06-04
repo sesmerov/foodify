@@ -26,9 +26,9 @@
                                     echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
                                     break;
                                 case 'CLIENTE':
-                                    echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
                                     break;
-                                case 'COCINA':
+                                case 'COCINERO':
                                     echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
                                     break;
                                 default:
@@ -53,16 +53,24 @@
     </nav>
 
 
-    <!-- INTRODUCCION -->
-    <div class="hero flex items-center h-96">
-        <div class="text-left p-9 rounded-lg w-full max-w-screen-xl mx-auto">
-            <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"><br><br><br>
+    <!-- INTRODUCCIÓN -->
+    <div class="hero flex items-center justify-center h-96">
+        <div class="text-center p-9 rounded-lg w-full max-w-screen-xl mx-auto">
+            <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 mx-auto">
+                <br><br><br>
                 <h1 class="text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
-                <p class="text-white mt-4 text-base sm:text-lg">En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.</p>
-                <button class="hero-button mt-6">Registrarse / Iniciar sesión</button>
+                <p class="text-white mt-4 text-base sm:text-lg">
+                    En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.
+                </p>
+                <?php if ($_SESSION['userLogged'] == null): ?>
+                    <a href="index.php?order=login">
+                        <button class="hero-button mt-4">Iniciar sesión</button>
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
+
 
 
     <div class="max-w-6xl mx-auto bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-lg mt-10">

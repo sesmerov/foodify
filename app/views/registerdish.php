@@ -9,6 +9,47 @@
 </head>
 <body class="bg-gray-100">
 
+ <!-- NAVBAR -->
+    <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
+        <div class="container px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
+                <div>
+                    <form action="" class="flex space-x-5">
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            switch ($_SESSION['userLogged']->role) {
+                                case 'ADMIN':
+                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
+                                    break;
+                                case 'CLIENTE':
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
+                                    break;
+                                case 'COCINERO':
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    break;
+                                default:
+                                    # code...
+                                    break;
+                            }
+                        } else {
+                            echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
+                            echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
+                        }
+                        ?>
+                        <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
+                        }
+                        ?>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
 <div class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-lg">
     <h1 class="text-2xl font-bold mb-6 text-gray-800">Añadir Plato</h1>
 

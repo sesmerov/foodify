@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     function setupMenu(buttonId, menuId, closeButtonId) {
         const button = document.getElementById(buttonId);
@@ -49,9 +50,11 @@ function reducirPlato(id) {
 }
 
 function aumentarPlato(id) {
-     fetch(`index.php?order=addToCart&id_dish=${id}`, {
+    fetch(`index.php?order=addToCart&id_dish=${id}`, {
         method: "GET"
     }).then(() => {
         location.reload();
     });
 }
+
+

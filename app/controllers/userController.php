@@ -45,7 +45,20 @@ public function adduser($first_name, $last_name, $email, $address, $password, $r
     $user->__set('password',password_hash($password, PASSWORD_DEFAULT));
     $user->__set('role', $role);
 
-    $db->UpdateUser($user);
+    return $db->UpdateUser($user);
+    }
+
+        public function UpdateUserWithoutPassword($id, $first_name,$last_name,$email,$address, $role){
+    $db = DatabaseConnection::getModel();
+    $user = new User();
+    $user->__set('id_user',$id);  
+    $user->__set('first_name', $first_name);
+    $user->__set('last_name',$last_name);
+    $user->__set('email', $email);
+    $user->__set('address',$address);
+    $user->__set('role', $role);
+
+    return $db->updateUserWithoutPassword($user);
     }
 
 }
