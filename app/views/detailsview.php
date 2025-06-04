@@ -16,12 +16,37 @@
     <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
         <div class="container px-6 py-3">
             <div class="flex justify-between items-center">
-                <div class="text-lg font-semibold text-gray-800 mr-12"> Foodify </div>
-                <div class="flex space-x-5">
-                    <button class="nav-button text-sm">Iniciar Sesión</button>
-                    <button class="nav-button text-sm">Acceso Administrador</button>
-                    <button class="nav-button text-sm"><i class="fas fa-shopping-cart"></i> Carrito</button>
-                    <button class="nav-button text-sm"><i class="fas fa-cog"></i> Ajustes</button>
+                <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
+                <div>
+                    <form action="" class="flex space-x-5">
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            switch ($_SESSION['userLogged']->role) {
+                                case 'ADMIN':
+                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
+                                    break;
+                                case 'CLIENTE':
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
+                                    break;
+                                case 'COCINERO':
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    break;
+                                default:
+                                    # code...
+                                    break;
+                            }
+                        } else {
+                            echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
+                            echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
+                        }
+                        ?>
+                        <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
+                        }
+                        ?>
+                    </form>
                 </div>
             </div>
         </div>
@@ -47,11 +72,15 @@
         </div>
 
         <!-- LISTA DE PLATOS -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6 divide-y">
             <?php foreach ($plates as $plate): ?>
-                <img  class="w-20 h-20 object-cover rounded-full mr-4" src="<?= getClientImage($plate->id_dish) ?? 'rec/placeholder.jpg' ?>" alt="<?= htmlspecialchars($plate->name) ?>">
-                <h3><?= htmlspecialchars($plate->name) ?></h3>
-                <p><?= number_format($plate->price, 2) ?>€ x <?= $orders->GetQuantity($plate->id_dish, $_GET['id']) ?></p>
+                <div class="flex items-center px-6 py-4">
+                    <img class="w-16 h-16 object-cover rounded-full mr-4" src="<?= getClientImage($plate->id_dish) ?? 'rec/placeholder.jpg' ?>" alt="<?= htmlspecialchars($plate->name) ?>">
+                    <div class="flex-grow">
+                        <h3 class="text-lg font-semibold text-gray-800"><?= htmlspecialchars($plate->name) ?></h3>
+                        <p class="text-gray-600 text-sm"><?= number_format($plate->price, 2) ?>€ x <?= $orders->GetQuantity($plate->id_dish, $_GET['id']) ?></p>
+                    </div>
+                </div>
             <?php endforeach; ?>
         </div>
 

@@ -59,10 +59,10 @@
             <p class="text-white mt-4">En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con
                 ingredientes frescos y de la más alta calidad. ¡Deja que nosotros cocinemos por ti!</p>
             <br><br>
-            <?php if( $_SESSION['userLogged'] == null):  ?>
-            <button class="hero-button">Registrarse / Iniciar sesión</button>
+            <?php if ($_SESSION['userLogged'] == null):  ?>
+                <a href="index.php?order=login"><button class="hero-button">Iniciar sesión</button></a>
             <?php endif; ?>
-            
+
         </div>
     </div>
     <br><br>
@@ -196,14 +196,22 @@
         <div class="w-full carousel-wrapper overflow-hidden relative">
             <div class="w-full carousel-track flex">
 
-                <!-- SECCION 1 (IMAGENES ORIGINALES) -->
+                <!-- SECCIÓN 1 (IMÁGENES ORIGINALES) -->
                 <?php foreach ($dishes as $dish): ?>
-                    <img src="<?= getClientImage($dish->id_dish) ?>" alt="<?= htmlspecialchars($dish->name) ?>" class="carousel-item">
+                    <a href="index.php?dish&id=<?= $dish->id_dish ?>">
+                        <img src="<?= getClientImage($dish->id_dish) ?>"
+                            alt="<?= htmlspecialchars($dish->name) ?>"
+                            class="carousel-item hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    </a>
                 <?php endforeach; ?>
 
-                <!-- SECCION 2 (IMAGENES DUPLICADAS PARA EL LOOP) -->
+                <!-- SECCIÓN 2 (IMÁGENES DUPLICADAS PARA EL LOOP) -->
                 <?php foreach ($dishes as $dish): ?>
-                    <img src="<?= getClientImage($dish->id_dish) ?>" alt="<?= htmlspecialchars($dish->name) ?>" class="carousel-item">
+                    <a href="index.php?dish&id=<?= $dish->id_dish ?>">
+                        <img src="<?= getClientImage($dish->id_dish) ?>"
+                            alt="<?= htmlspecialchars($dish->name) ?>"
+                            class="carousel-item hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    </a>
                 <?php endforeach; ?>
             </div>
         </div>

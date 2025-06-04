@@ -28,7 +28,7 @@
                                 case 'CLIENTE':
                                     echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
                                     break;
-                                case 'COCINA':
+                                case 'COCINERO':
                                     echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
                                     break;
                                 default:

@@ -38,11 +38,6 @@ class DatabaseConnection
         }
     }
 
-
-    //AÑADIR AQUI FUNCIONES
-
-
-
     // ==== COUNTS ====
 
     public function getNumDishes()
@@ -66,9 +61,7 @@ class DatabaseConnection
         return $stmt->fetchColumn();
     }
 
-
     // ==== GETS PARA LISTAS ====
-
 
     public function getAllDishes(): array
     {
@@ -347,7 +340,20 @@ class DatabaseConnection
         $stmt->bindParam(':role', $user->__get('role'));
         $stmt->bindParam(':id', $user->__get('id_user'));
         $stmt->execute();
-        return $stmt->rowCount() === 1;
+        return $user;
+    }
+
+        public function updateUserWithoutPassword($user)
+    {
+        $stmt = $this->dbh->prepare("UPDATE public.user SET first_name = :first_name, last_name = :last_name, email = :email, address = :address, role = :role WHERE id_user = :id");
+        $stmt->bindParam(':first_name', $user->__get('first_name'));
+        $stmt->bindParam(':last_name', $user->__get('last_name'));
+        $stmt->bindParam(':email', $user->__get('email'));
+        $stmt->bindParam(':address', $user->__get('address'));
+        $stmt->bindParam(':role', $user->__get('role'));
+        $stmt->bindParam(':id', $user->__get('id_user'));
+        $stmt->execute();
+        return $user;
     }
 
     public function updateOrder($order)
@@ -516,10 +522,6 @@ public function deleteOrder($id)
         return $stmt->rowCount() > 0;
     }
 
-
-
-
-
     // Cierro la conexión anulando todos los objectos relacioanado con la conexión PDO (stmt)
     public static function closeModelo()
     {
@@ -530,8 +532,6 @@ public function deleteOrder($id)
             self::$model = null; // Borro el objeto.
         }
     }
-
-
 
     // Evito que se pueda clonar el objeto. (SINGLETON)
     public function __clone()

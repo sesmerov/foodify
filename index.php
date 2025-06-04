@@ -100,8 +100,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     switch ($order) {
         case 'profile':
             ob_clean();
-            $user =  $_SESSION['userLogged'];
-            include_once 'app/views/UserCustom.php';
+            if ($_SESSION['userLogged'] == null || $_SESSION['userLogged']->role !== 'CLIENTE') {
+                include_once 'app/views/login.php';
+            } else {
+                $user =  $_SESSION['userLogged'];
+                include_once 'app/views/UserCustom.php';
+            }
+
             break;
         case 'login':
             ob_clean();
@@ -158,33 +163,30 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             }
             header("Location: " . $_SERVER['HTTP_REFERER']);
             exit;
-
-
-
-
         case 'adddish':
             ob_clean();
-            include_once 'app/views/reigsterdish.php';
+            if ($_SESSION['userLogged'] == null || $_SESSION['userLogged']->role !== 'ADMIN') {
+                include_once 'app/views/login.php';
+            } else {
+                include_once 'app/views/registerdish.php';
+            }
             break;
-
         case 'admin':
             ob_clean();
-            if ($_SESSION['userLogged'] == null) {
+            if ($_SESSION['userLogged'] == null || $_SESSION['userLogged']->role !== 'ADMIN') {
                 include_once 'app/views/login.php';
             } else {
                 require_once 'app/views/adminview.php';
             }
             break;
-            
-                case 'kitchen':
-                    ob_clean();
+        case 'kitchen':
+            ob_clean();
             if ($_SESSION['userLogged'] == null || $_SESSION['userLogged']->role !== 'COCINERO') {
                 include_once 'app/views/login.php';
             } else {
                 require_once 'app/views/adminview.php';
             }
             break;
-
         case 'usu':
             ob_clean();
             $posini = $_SESSION['posini'];
@@ -203,18 +205,15 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $dishes = $db->getDishes(FPAG, $posini);
             include_once 'app/views/adminview.php';
             break;
-
         case 'modU':
             ob_clean();
             $user = $users->getUserById($_GET['id']);
             include_once 'app/views/UserCustom.php';
             break;
-
         case 'deleteU':
             ob_clean();
             $users->DeleteUser($_GET['id']);
             break;
-
         case 'detailsD':
             ob_clean();
             $dish = $controller->getDishById($_GET['id']);
@@ -228,28 +227,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $allergens = $controller->getAllergensByDishID($_GET['id']);
             include_once 'app/views/moddish.php';
             break;
-
         case 'deleteD':
             ob_clean();
             $dish = $controller->DeleteDish($_GET['id']); //no se por que pone eso pero funciona la funcion idk 
             break;
-
-
         case 'detailsO':
             ob_clean();
             $order = $orders->getOrderById($_GET['id']);
             $plates = $orders->getOrderDishes($_GET['id']);
             include_once 'app/views/detailsview.php';
             break;
-
-
         case 'mod':
             ob_clean();
             $order = $orders->getOrderById($_GET['id']);
             $plates = $orders->getOrderDishes($_GET['id']);
             include_once 'app/views/modDetails.php';
             break;
-
         case 'deleteO':
             ob_clean();
             $orders->DeleteOrder($_GET['id']);
@@ -262,7 +255,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $types = $controller->getAllDishTypes();
         $allergens = $controller->getAllAllergens();
 
-        if (isset($_GET["searcher"])) {
+        if (!empty($_GET["searcher"])) {
             $dishes  =  $controller->getDishesByName($_GET["searcher"]);
             ob_clean();
             include_once 'app/views/dishesView.php';
@@ -280,7 +273,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             include_once 'app/views/dishesView.php';
             exit;
         }
-
 
         //PARA CUANDO SE ACCEDE DESDE MAIN
         if (isset($_GET['type'])) {
@@ -361,48 +353,49 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             ob_clean();
             $controller->updateDish($_POST['id_dish'], $_POST['name'], $_POST['price'], $_POST['type'], $_POST['details'], $_POST['allergens'] ?? [], $_FILES['image'] ?? null);
             header("Location: index.php?order=dish");
-
             break;
-
         case 'submitcart':
             ob_clean();
-            $user = $_SESSION['userLogged'];
-            if ($user) {
-                $ids = array_keys($_SESSION['cart']);
-                $cartDishes = $controller->getDishesByIds($ids);
-                $date = $_POST['date'];
-                $total = $_POST['total'];
-                $orders->AddOrder($date, $total, $user->address, "PENDIENTE", $user->id_user);
-                $_SESSION['cart'] = [];
+            if ($_SESSION['userLogged'] == null || $_SESSION['userLogged']->role !== 'CLIENTE') {
+                header("Location: index.php?order=login");
+            } else {
+                $user = $_SESSION['userLogged'];
+                if ($user) {
+                    $ids = array_keys($_SESSION['cart']);
+                    $cartDishes = $controller->getDishesByIds($ids);
+                    $date = $_POST['date'];
+                    $total = $_POST['total'];
+                    $orders->AddOrder($date, $total, $user->address, "PENDIENTE", $user->id_user);
+                    $_SESSION['cart'] = [];
+                }
+                header("Location: index.php");
             }
-            header("Location: index.php");
             break;
-
-
         case 'modpostU':
             ob_clean();
             $user = $_SESSION['userLogged'];
-            $users->UpdateUser($_POST['id'], $_POST['nuevo-nombre'], $_POST['nuevo-apellido'], $_POST['nuevo-email'], $_POST['nueva-direccion'], $_POST['nueva-contrasena'], $_POST['role']);
+            if ($_POST['nueva-contrasena'] == "") {
+                $_SESSION['userLogged'] = $users->UpdateUserWithoutPassword($_POST['id'], $_POST['nuevo-nombre'], $_POST['nuevo-apellido'], $_POST['nuevo-email'], $_POST['nueva-direccion'], $_POST['role']);
+            } else {
+                $_SESSION['userLogged'] = $users->UpdateUser($_POST['id'], $_POST['nuevo-nombre'], $_POST['nuevo-apellido'], $_POST['nuevo-email'], $_POST['nueva-direccion'], $_POST['nueva-contrasena'], $_POST['role']);
+            }
+
+
             if ($user->role == "ADMIN") {
                 header("Location: index.php?order=usu");
             } else {
                 header("Location: index.php");
             }
-
-
             break;
-
         case 'register':
             ob_clean();
             $registerError = null;
-
 
             if ($_POST['contrasena'] !== $_POST['contrasena2']) {
                 $registerError = "Las contraseñas no coinciden";
                 include_once 'app/views/newUser.php';
                 break;
             }
-
 
             $nombre = htmlspecialchars($_POST['nombre']);
             $apellido = htmlspecialchars($_POST['apellido']);
@@ -411,12 +404,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $contrasena = $_POST['contrasena'];
             $role = $_POST['role'] ?? 'CLIENTE';
 
-
             $result = $users->adduser($nombre, $apellido, $email, $direccion, $contrasena, $role);
 
-
             if ($result === true) {
-
                 $user = $users->getUserByEmail($email);
                 if ($user) {
                     $_SESSION['userLogged'] = $user;
@@ -429,32 +419,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             } else {
                 $registerError = "Error en el registro. Intente nuevamente.";
             }
-
-
             include_once 'app/views/newUser.php';
             break;
-
         case 'updateOrder':
             $id_order = $_POST['id_order'];
             $direccion = $_POST['direccion'];
             $estado = $_POST['estado'];
             $orders->updateOrder($id_order, $direccion, $estado);
             header("Location: index.php?order=order");
-
             break;
-
-
         case 'addpostD':
-
             if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']->role !== 'ADMIN') {
                 header("Location: index.php?order=login");
                 exit;
             } else {
-                $controller->addDish($_POST["name"],$_POST["price"],$_POST["type"],$_POST["details"],$_POST["allergens"] ?? [],$_FILES['image'] ?? null);
+                $controller->addDish($_POST["name"], $_POST["price"], $_POST["type"], $_POST["details"], $_POST["allergens"] ?? [], $_FILES['image'] ?? null);
                 header("Location: index.php?order=admin");
             }
-
-
             break;
     }
 }
