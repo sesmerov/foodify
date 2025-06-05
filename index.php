@@ -219,7 +219,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $allergens = $controller->getAllergensByDishID($_GET['id']);
             include_once 'app/views/dishview.php';
             break;
-
         case 'modD':
             ob_clean();
             $dish  = $controller->getDishById($_GET['id']);
