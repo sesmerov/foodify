@@ -55,7 +55,7 @@
     <!-- INTRODUCCION -->
     <div class="hero flex items-center justify-center h-96">
         <div class="text-center p-9 rounded-lg"><br><br><br>
-            <h1 class="text-4xl font-bold text-white">El placer está en tu mano</h1>
+            <h1 class="text-4xl font-bold text-white">El placer está a un click</h1>
             <p class="text-white mt-4">Cada plato en tu carrito es una promesa de sabor. Completa tu pedido y deja que
                 comience el deleite.</p>
         </div>

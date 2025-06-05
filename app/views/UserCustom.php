@@ -66,14 +66,14 @@
                 <input type="hidden" name="role" value="<?php echo $user->role; ?>">
 
                 <div>
-                    <label for="nuevo-nombre" class="block text-sm font-medium text-gray-600 mt-2">nombre</label>
+                    <label for="nuevo-nombre" class="block text-sm font-medium text-gray-600 mt-2">Nombre</label>
                     <input type="text" id="nuevo-nombre" name="nuevo-nombre" value= "<?php echo $user->first_name;?>"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500">
                 </div>
 
                 <div>
                     <label for="nuevo-apellido" class="block text-sm font-medium text-gray-600 mt-2">
-                        apellido</label>
+                        Apellido</label>
                     <input type="text" id="nuevo-apellido" name="nuevo-apellido" value = "<?php echo $user->last_name;?>"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500">
                 </div>
@@ -86,7 +86,7 @@
 
                 <div>
                     <label for="nueva-direccion" class="block text-sm font-medium text-gray-600 mt-2">
-                        dirección</label>
+                        Dirección</label>
                     <input type="text" id="nueva-direccion" name="nueva-direccion" value =  "<?php echo $user->address; ?>"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500">
                 </div>

@@ -49,7 +49,7 @@
       </div>
     </div>
   </nav>
-          <br>
+  <br>
   <h1 class="text-3xl font-bold text-custom-red mb-4 mt-1">Zona de administración</h1>
 
   <div class="bg-custom-red w-full py-8">
@@ -69,12 +69,12 @@
       <form method="get" action="" class="flex space-x-4 justify-center">
         <?php if ($_SESSION['userLogged'] && $_SESSION['userLogged']->role == 'ADMIN') : ?>
           <button type="submit" name="order" value="usu" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Usuarios</button>
-          <button type="submit" name="order" value="order" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Pedidos</button>
+          <button type="submit" name="order" value="dish" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Platos</button>
           <button type="submit" name="order" value="adddish" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Añadir un plato</button>
         <?php endif; ?>
+        <button type="submit" name="order" value="order" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Pedidos</button>
 
         <!-- BOTÓN VISIBLE PARA TODOS -->
-        <button type="submit" name="order" value="dish" class="border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-custom-red hover:scale-105 transition-transform duration-300 w-1/3 max-w-xs">Platos</button>
       </form>
     </div>
   </div>
