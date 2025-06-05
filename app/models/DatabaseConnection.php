@@ -100,13 +100,26 @@ class DatabaseConnection
 
     public function getOrders($limit, $offset)
     {
-        $stmt = $this->dbh->prepare("SELECT * FROM public.order ORDER BY id_order LIMIT :limit OFFSET :offset");
+        $stmt = $this->dbh->prepare("
+        SELECT * 
+        FROM public.order 
+        ORDER BY 
+            CASE status
+                WHEN 'PENDIENTE' THEN 1
+                WHEN 'EN PROCESO' THEN 2
+                WHEN 'FINALIZADO' THEN 3
+                ELSE 4
+            END,
+            id_order
+        LIMIT :limit OFFSET :offset
+    ");
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Order');
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
 
 
     public function getAllDishTypes(): array
@@ -343,7 +356,7 @@ class DatabaseConnection
         return $user;
     }
 
-        public function updateUserWithoutPassword($user)
+    public function updateUserWithoutPassword($user)
     {
         $stmt = $this->dbh->prepare("UPDATE public.user SET first_name = :first_name, last_name = :last_name, email = :email, address = :address, role = :role WHERE id_user = :id");
         $stmt->bindParam(':first_name', $user->__get('first_name'));
@@ -367,10 +380,10 @@ class DatabaseConnection
 
     // ==== ADDS ====
 
-     public function addDish($dish)
+    public function addDish($dish)
     {
         $stmt = $this->dbh->prepare("INSERT INTO public.dish (name, price, type, details) VALUES (:name, :price, :type, :details)");
-        $stmt->bindParam(':name', $dish->__get('name') );
+        $stmt->bindParam(':name', $dish->__get('name'));
         $stmt->bindParam(':price', $dish->__get('price'));
         $stmt->bindParam(':type', $dish->__get('type'));
         $stmt->bindParam(':details', $dish->__get('details'));
@@ -447,22 +460,21 @@ class DatabaseConnection
 
     // ==== DELETE====
 
-      public function deleteDish($id)
+    public function deleteDish($id)
     {
         try {
             $this->dbh->beginTransaction();
-    
+
             $stmtAllergen = $this->dbh->prepare("DELETE FROM public.dish_allergen WHERE id_dish = :id");
             $stmtAllergen->bindParam(':id', $id, PDO::PARAM_INT);
             $stmtAllergen->execute();
-    
+
             $stmtDish = $this->dbh->prepare("DELETE FROM public.dish WHERE id_dish = :id");
             $stmtDish->bindParam(':id', $id, PDO::PARAM_INT);
             $stmtDish->execute();
-    
+
             $this->dbh->commit();
             return $stmtDish->rowCount() === 1;
-            
         } catch (PDOException $e) {
             $this->dbh->rollBack();
             error_log("Error deleting dish: " . $e->getMessage());
@@ -478,30 +490,29 @@ class DatabaseConnection
         return $stmt->rowCount() === 1;
     }
 
-public function deleteOrder($id)
-{
-    try {
-        $this->dbh->beginTransaction();
-        
+    public function deleteOrder($id)
+    {
+        try {
+            $this->dbh->beginTransaction();
 
-        $stmt_detail = $this->dbh->prepare("DELETE FROM public.order_detail WHERE id_order = :id");
-        $stmt_detail->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt_detail->execute();
-        
 
-        $stmt_order = $this->dbh->prepare("DELETE FROM public.order WHERE id_order = :id");
-        $stmt_order->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt_order->execute();
-        
-        $this->dbh->commit();
-        return true;
-        
-    } catch (PDOException $e) {
-        $this->dbh->rollBack();
-        error_log("Error deleting order: " . $e->getMessage());
-        return false;
+            $stmt_detail = $this->dbh->prepare("DELETE FROM public.order_detail WHERE id_order = :id");
+            $stmt_detail->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt_detail->execute();
+
+
+            $stmt_order = $this->dbh->prepare("DELETE FROM public.order WHERE id_order = :id");
+            $stmt_order->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt_order->execute();
+
+            $this->dbh->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->dbh->rollBack();
+            error_log("Error deleting order: " . $e->getMessage());
+            return false;
+        }
     }
-}
     public function deleteAllergenfromaDish($id_dish, $id_allergen)
     {
         $stmt = $this->dbh->prepare("DELETE FROM public.dish_allergen WHERE id_dish = :id_dish AND id_allergen = :id_allergen");

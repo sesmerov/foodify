@@ -27,7 +27,6 @@ $dishes = $controller->showRandomDishes();
 $users = new userController();
 $orders = new orderController();
 
-
 require_once 'app/views/main.php'; // Renderiza la vista principal
 
 define('FPAG', 5);
@@ -374,11 +373,42 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         case 'modpostU':
             ob_clean();
             $user = $_SESSION['userLogged'];
+
             if ($_POST['nueva-contrasena'] == "") {
-                $_SESSION['userLogged'] = $users->UpdateUserWithoutPassword($_POST['id'], $_POST['nuevo-nombre'], $_POST['nuevo-apellido'], $_POST['nuevo-email'], $_POST['nueva-direccion'], $_POST['role']);
+                // Sin cambiar contraseña
+                $users->UpdateUserWithoutPassword(
+                    $_POST['id'],
+                    $_POST['nuevo-nombre'],
+                    $_POST['nuevo-apellido'],
+                    $_POST['nuevo-email'],
+                    $_POST['nueva-direccion'],
+                    $_POST['role']
+                );
             } else {
-                $_SESSION['userLogged'] = $users->UpdateUser($_POST['id'], $_POST['nuevo-nombre'], $_POST['nuevo-apellido'], $_POST['nuevo-email'], $_POST['nueva-direccion'], $_POST['nueva-contrasena'], $_POST['role']);
+                // Con nueva contraseña
+                $users->UpdateUser(
+                    $_POST['id'],
+                    $_POST['nuevo-nombre'],
+                    $_POST['nuevo-apellido'],
+                    $_POST['nuevo-email'],
+                    $_POST['nueva-direccion'],
+                    $_POST['nueva-contrasena'],
+                    $_POST['role']
+                );
             }
+
+            // Solo actualizamos la sesión si el usuario es CLIENTE
+            if ($user->role === "CLIENTE") {
+                $_SESSION['userLogged'] = $users->getUserById($_POST['id']);
+            }
+
+            if ($user->role === "ADMIN") {
+                header("Location: index.php?order=usu");
+            } else {
+                header("Location: index.php");
+            }
+            break;
+
 
 
             if ($user->role == "ADMIN") {

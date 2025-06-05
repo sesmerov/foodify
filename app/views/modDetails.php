@@ -59,20 +59,21 @@
         <form method="POST" action="index.php" class="bg-white rounded-lg shadow-md p-6 mb-6">
             <input type="hidden" name="ord" value="updateOrder">
             <input type="hidden" name="id_order" value="<?= $order->id_order ?>">
-            
+
             <!-- Sección de Edición -->
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">Editar Pedido #<?= $order->id_order ?></h2>
-                
+
                 <!-- Campo Dirección -->
                 <div class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="direccion">
                         Dirección de Entrega
                     </label>
-                    <input type="text" id="direccion" name="direccion" 
+                    <input type="text" id="direccion" name="direccion"
                         value="<?= htmlspecialchars($order->delivery_address) ?>"
+                        <?= ($_SESSION['userLogged']->role === 'COCINERO') ? 'disabled' : '' ?>
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500
-                               transition duration-200 ease-in-out">
+           transition duration-200 ease-in-out <?= ($_SESSION['userLogged']->role === 'COCINERO') ? 'bg-gray-200 cursor-not-allowed' : '' ?>">
                 </div>
 
                 <!-- Selector de Estado -->
@@ -80,12 +81,12 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="estado">
                         Estado del Pedido
                     </label>
-                    <select id="estado" name="estado" 
+                    <select id="estado" name="estado"
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500
                                appearance-none cursor-pointer">
-                        <?php 
+                        <?php
                         $estados = ['PENDIENTE', 'EN PROCESO', 'FINALIZADO'];
-                        foreach ($estados as $opcion) : 
+                        foreach ($estados as $opcion) :
                             $selected = ($opcion == $order->status) ? 'selected' : '';
                         ?>
                             <option value="<?= $opcion ?>" <?= $selected ?>><?= $opcion ?></option>
@@ -99,9 +100,9 @@
                 <h3 class="text-lg font-semibold text-gray-800 mb-3">Platos del Pedido</h3>
                 <?php foreach ($plates as $plate): ?>
                     <div class="flex items-center mb-3 p-2 bg-white rounded-md">
-                        <img class="w-12 h-12 object-cover rounded-full mr-3" 
-                             src="<?= getClientImage($plate->id_dish) ?? 'rec/placeholder.jpg' ?>" 
-                             alt="<?= htmlspecialchars($plate->name) ?>">
+                        <img class="w-12 h-12 object-cover rounded-full mr-3"
+                            src="<?= getClientImage($plate->id_dish) ?? 'rec/placeholder.jpg' ?>"
+                            alt="<?= htmlspecialchars($plate->name) ?>">
                         <div class="flex-1">
                             <p class="font-medium text-gray-800"><?= htmlspecialchars($plate->name) ?></p>
                             <p class="text-sm text-gray-600">
@@ -114,15 +115,16 @@
 
             <!-- Botones de Acción -->
             <div class="flex justify-between items-center mt-8">
-                <a href="index.php?order=order" 
-                   class="text-gray-600 hover:text-gray-800 font-medium">
+                <a href="index.php?order=order"
+                    class="text-gray-600 hover:text-gray-800 font-medium">
                     <i class="fas fa-arrow-left mr-2"></i>Volver
                 </a>
-                <button type="submit" 
+                <a href="index.php?order=order"
                     class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-lg 
                            transition duration-200 ease-in-out transform hover:scale-105">
                     <i class="fas fa-save mr-2"></i>Guardar Cambios
-                </button>
+
+                </a>
             </div>
         </form>
 

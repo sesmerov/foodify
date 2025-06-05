@@ -68,7 +68,9 @@
     <div class="container mx-auto px-4 py-8 max-w-2xl">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Detalles de tu pedido</h1>
-            <span class="text-gray-500"><?= count($plates) ?> artículo(s)</span>
+            <span class="text-gray-500">
+                <?= count($plates) ?> <?= count($plates) === 1 ? 'artículo' : 'artículos' ?>
+            </span>
         </div>
 
         <!-- LISTA DE PLATOS -->
