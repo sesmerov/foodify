@@ -71,9 +71,9 @@
                     </label>
                     <input type="text" id="direccion" name="direccion"
                         value="<?= htmlspecialchars($order->delivery_address) ?>"
-                        <?= ($_SESSION['userLogged']->role === 'COCINERO') ? 'disabled' : '' ?>
-                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500
-           transition duration-200 ease-in-out <?= ($_SESSION['userLogged']->role === 'COCINERO') ? 'bg-gray-200 cursor-not-allowed' : '' ?>">
+                        <?= ($_SESSION['userLogged']->role === 'COCINERO') ? 'readonly' : '' ?>
+                        class="... <?= ($_SESSION['userLogged']->role === 'COCINERO') ? 'bg-gray-200 cursor-not-allowed' : '' ?>">
+
                 </div>
 
                 <!-- Selector de Estado -->
@@ -119,12 +119,11 @@
                     class="text-gray-600 hover:text-gray-800 font-medium">
                     <i class="fas fa-arrow-left mr-2"></i>Volver
                 </a>
-                <a href="index.php?order=order"
+                <button type="submit"
                     class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-lg 
-                           transition duration-200 ease-in-out transform hover:scale-105">
+           transition duration-200 ease-in-out transform hover:scale-105">
                     <i class="fas fa-save mr-2"></i>Guardar Cambios
-
-                </a>
+                </button>
             </div>
         </form>
 
@@ -160,4 +159,5 @@
     </footer>
 
 </body>
+
 </html>
