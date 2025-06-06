@@ -7,7 +7,10 @@
     <title>Foodify</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="web/css/admin_style.css" rel="stylesheet">
+    <link href="web/css/dishes_style.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./web/media/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./web/media/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./web/media/icons/favicon-16x16.png">
 </head>
 
 <body class="bg-gray-100">
@@ -53,11 +56,11 @@
     </nav>
 
     <!-- INTRODUCCIÓN -->
-    <div class="hero flex items-center justify-center h-96">
+    <div class="bg-red-500 mb-9 flex items-center justify-center h-96">
         <div class="text-center p-9 rounded-lg w-full max-w-screen-xl mx-auto">
             <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 mx-auto">
                 <br><br><br>
-                <h1 class="text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
+                <h1 class="text-white text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
                 <p class="text-white mt-4 text-base sm:text-lg">
                     En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.
                 </p>
@@ -139,7 +142,7 @@
                 <div class="relative">
                     <button
                         type="submit"
-                        class="bg-red-500 text-gray-800 px-4 py-2 rounded-md w-60 ">
+                        class="bg-red-500 text-white px-4 py-2 rounded-md w-60 ">
                         Buscar
                     </button>
                 </div>
@@ -168,7 +171,7 @@
                             <input type="hidden" name="id_dish" value="<?= $dish->id_dish ?>">
                             <button
                                 type="submit"
-                                class="bg-red-600 text-white font-semibold text-xl py-4 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
+                                class="bg-red-600 text-white font-semibold text-lg py-2 px-5 rounded-full hover:bg-red-700 transition-colors duration-300">
                                 Añadir
                             </button>
                         </form>
@@ -211,8 +214,9 @@
                         <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-300"> <i
                                 class="fab fa-youtube fa-2x"></i> </a>
                     </div>
-
-                    <div class="mt-6 text-gray-800 text-4xl font-bold">Foodify</div>
+                    <div class="mt-5">
+                        <img src="./web/media/icons/foodify_name_logo.jpeg" alt="">
+                    </div>
                 </div>
 
                 <div class="bg-gray-100 p-6 rounded-lg">

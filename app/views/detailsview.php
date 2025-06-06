@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="./css/dish_style.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./web/media/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./web/media/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./web/media/icons/favicon-16x16.png">
 </head>
 
 <body class="bg-gray-100">
@@ -116,7 +119,9 @@
                         <a href="#" class="text-gray-600 hover:text-blue-400"><i class="fab fa-twitter fa-2x"></i></a>
                         <a href="#" class="text-gray-600 hover:text-red-600"><i class="fab fa-youtube fa-2x"></i></a>
                     </div>
-                    <div class="mt-6 text-gray-800 text-4xl font-bold">Foodify</div>
+                    <div class="mt-5">
+                        <img src="./web/media/icons/foodify_name_logo.jpeg" alt="">
+                    </div>
                 </div>
 
                 <!-- ... Otros bloques del footer (puedes conservarlos igual) -->

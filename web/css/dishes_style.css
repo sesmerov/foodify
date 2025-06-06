@@ -59,8 +59,7 @@ body {
 
 /* Sección Hero */
 .hero {
-    background-color: var(--color-primary-light);
-    color: #EF4444;
+    background-color: #EF4444;
     background-image: url('https://via.placeholder.com/1200x400');
     background-size: cover;
     background-position: center;
