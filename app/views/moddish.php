@@ -7,6 +7,8 @@
     <title>Editar Plato - Foodify</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="web/media/icons/favicon-96x96.png">
+
 </head>
 
 <body class="bg-gray-100">
@@ -54,7 +56,7 @@
 
             <div>
                 <label for="image" class="block text-gray-700 mb-2 font-medium">Imagen del Plato</label>
-               <input id="image" name="image" type="file" accept="image/*" class="w-full text-gray-700">
+                <input id="image" name="image" type="file" accept="image/*" class="w-full text-gray-700">
                 <p class="mt-2 text-sm text-gray-500">Imagen actual: <img src="<?= getClientImage($dish->id_dish) ?>" alt="Imagen actual" class="inline-block w-40 h-40 object-cover rounded"></p>
 
             </div>
@@ -63,7 +65,7 @@
                 <label class="block text-gray-700 mb-2 font-medium">Alérgenos</label>
                 <div class="grid grid-cols-2 gap-2">
                     <?php
-                    $allergenIds = $controller->getAllergensCodeByDishID($_GET['id']); 
+                    $allergenIds = $controller->getAllergensCodeByDishID($_GET['id']);
                     ?>
 
                     <div class="grid grid-cols-2 gap-2">

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="./css/user_style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="web/media/icons/favicon-96x96.png">
 </head>
 
 <body class="bg-gray-100">
@@ -15,8 +16,11 @@
     <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
         <div class="container px-6 py-3">
             <div class="flex justify-between items-center">
-                <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
-                <div>
+                <div class="w-16 mr-5">
+                    <a href="./index.php">
+                        <img src="./web/media/icons/foodify_name_logo_white.png" alt="Foodify logo" class="w-full h-auto">
+                    </a>
+                </div>                <div>
                     <form action="" class="flex space-x-5">
                         <?php
                         if ($_SESSION['userLogged'] != null) {
@@ -28,7 +32,7 @@
                                     echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
                                     break;
                                 case 'COCINERO':
-                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i> Acceso Cocina</button>';
                                     break;
                                 default:
                                     # code...
@@ -64,7 +68,7 @@
     <!-- REGISTRO -->
     <section class="flex justify-center items-center py-20 bg-gray-100">
         <div class="bg-white p-8 rounded shadow-lg w-full max-w-md mt-10">
-            <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Registrarse</h2>
+            <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Regístrate</h2>
             <form action="index.php" method="post" class="space-y-4">
 
                 <input type="hidden" name="ord" value="register">
@@ -102,7 +106,7 @@
                     <input type="password" id="contrasena" name="contrasena"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
                         required>
-                    <label for="contrasena" class="block text-sm font-medium text-gray-600"> confirmar Contraseña</label>
+                    <label for="contrasena" class="block text-sm font-medium text-gray-600"> Confirmar contraseña</label>
                     <input type="password" id="contrasena2" name="contrasena2"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
                         required>

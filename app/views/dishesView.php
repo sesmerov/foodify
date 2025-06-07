@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="web/css/admin_style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="web/media/icons/favicon-96x96.png">
 </head>
 
 <body class="bg-gray-100">
@@ -16,7 +17,11 @@
     <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
         <div class="container px-6 py-3">
             <div class="flex justify-between items-center">
-                <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
+                <div class="w-16 mr-5">
+                    <a href="./index.php">
+                        <img src="./web/media/icons/foodify_name_logo_white.png" alt="Foodify logo" class="w-full h-auto">
+                    </a>
+                </div>
                 <div>
                     <form action="" class="flex space-x-5">
                         <?php
@@ -26,10 +31,10 @@
                                     echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
                                     break;
                                 case 'CLIENTE':
-                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
                                     break;
                                 case 'COCINERO':
-                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i> Acceso Cocina</button>';
                                     break;
                                 default:
                                     # code...
@@ -53,11 +58,11 @@
     </nav>
 
     <!-- INTRODUCCIÓN -->
-    <div class="hero flex items-center justify-center h-96">
+    <div class="bg-red-500 mb-9 flex items-center justify-center h-96">
         <div class="text-center p-9 rounded-lg w-full max-w-screen-xl mx-auto">
             <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 mx-auto">
                 <br><br><br>
-                <h1 class="text-3xl sm:text-4xl font-bold">Disfruta de la comida que te mereces</h1>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white">Disfruta de la comida que te mereces</h1>
                 <p class="text-white mt-4 text-base sm:text-lg">
                     En Foodify, nos apasiona ofrecerte platos deliciosos y saludables, preparados con ingredientes frescos y de la más alta calidad.
                 </p>
@@ -139,7 +144,7 @@
                 <div class="relative">
                     <button
                         type="submit"
-                        class="bg-red-500 text-gray-800 px-4 py-2 rounded-md w-60 ">
+                        class="bg-red-500 text-white px-4 py-2 rounded-md w-60 ">
                         Buscar
                     </button>
                 </div>
@@ -168,8 +173,9 @@
                             <input type="hidden" name="id_dish" value="<?= $dish->id_dish ?>">
                             <button
                                 type="submit"
-                                class="bg-red-600 text-white font-semibold text-xl py-4 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
+                                class="bg-red-600 text-white font-semibold text-lg py-2 px-5 rounded-full hover:bg-red-700 transition-colors duration-300">
                                 Añadir
+
                             </button>
                         </form>
                         <!-- Botón Detalles -->
@@ -212,7 +218,9 @@
                                 class="fab fa-youtube fa-2x"></i> </a>
                     </div>
 
-                    <div class="mt-6 text-gray-800 text-4xl font-bold">Foodify</div>
+                    <div class="mt-5">
+                        <img src="./web/media/icons/foodify_name_logo.jpeg" alt="">
+                    </div>
                 </div>
 
                 <div class="bg-gray-100 p-6 rounded-lg">
@@ -263,15 +271,15 @@
     <script src="web/js/script_dishes.js"></script>
     <script>
         function toggleAllCheckboxes(name, buttonElement) {
-    const checkboxes = document.querySelectorAll(`input[name="${CSS.escape(name)}"]`);
-    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-    checkboxes.forEach(cb => cb.checked = !allChecked);
+            const checkboxes = document.querySelectorAll(`input[name="${CSS.escape(name)}"]`);
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            checkboxes.forEach(cb => cb.checked = !allChecked);
 
-    // Actualiza el texto del botón
-    if (buttonElement) {
-        buttonElement.textContent = allChecked ? "Seleccionar todo" : "Deseleccionar todo";
-    }
-}
+            // Actualiza el texto del botón
+            if (buttonElement) {
+                buttonElement.textContent = allChecked ? "Seleccionar todo" : "Deseleccionar todo";
+            }
+        }
     </script>
 </body>
 

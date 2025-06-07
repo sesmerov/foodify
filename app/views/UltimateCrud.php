@@ -29,7 +29,7 @@ switch ($orderType) {
                         <td class="px-4 py-2"><?= $usu->role; ?></td>
                         <td class="px-4 py-2">
                             <div class="flex space-x-2">
-                                <a href="#" onclick="borrarUsuario(<?=$usu->id_user?>)" class="text-red-500 hover:text-red-900 transition duration-300">
+                                <a href="#" onclick="borrarUsuario(<?= $usu->id_user ?>)" class="text-red-500 hover:text-red-900 transition duration-300">
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <a href="index.php?order=modU&id=<?= $usu->id_user ?>" class="text-yellow-500 hover:text-yellow-900 transition duration-300">
@@ -69,7 +69,7 @@ switch ($orderType) {
                                 <a href="index.php?order=detailsO&id=<?= $ord->id_order ?>" class="text-blue-500 hover:text-blue-900 transition duration-300">
                                     <i class="fas fa-info-circle"></i>
                                 </a>
-                               <a href="#" onclick="borrarOrden(<?= $ord->id_order ?>); return false;" class="text-red-500 hover:text-red-900 transition duration-300">
+                                <a href="#" onclick="borrarOrden(<?= $ord->id_order ?>); return false;" class="text-red-500 hover:text-red-900 transition duration-300">
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <a href="index.php?order=mod&id=<?= $ord->id_order ?>" class="text-yellow-500 hover:text-yellow-900 transition duration-300">
@@ -130,19 +130,19 @@ switch ($orderType) {
     <form method="get" action="index.php" class="flex space-x-2 ">
         <input type="hidden" name="order" value="<?= $_GET['order'] ?? '' ?>">
         <button type="submit" name="nav" value="Begin"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+            class="px-6 py-1 bg-red-500 text-white rounded-full text-sm hover:bg-red-700 transition duration-300">
             <<
                 </button>
                 <button type="submit" name="nav" value="Before"
-                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                    class="px-6 py-1 bg-red-500 text-white rounded-full text-sm hover:bg-red-700 transition duration-300">
                     <
                         </button>
                         <button type="submit" name="nav" value="Next"
-                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                            class="px-6 py-1 bg-red-500 text-white rounded-full text-sm hover:bg-red-700 transition duration-300">
                             >
                         </button>
                         <button type="submit" name="nav" value="Last"
-                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                            class="px-6 py-1 bg-red-500 text-white rounded-full text-sm hover:bg-red-700 transition duration-300">
                             >>
                         </button>
     </form>
