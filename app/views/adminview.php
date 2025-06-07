@@ -8,61 +8,66 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="web/css/admin_style.css" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="web/media/icons/favicon-96x96.png">
+
+
 </head>
 
 <body class="flex flex-col items-center min-h-screen">
-  <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
-    <div class="container px-6 py-3">
-      <div class="flex justify-between items-center">
-        <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
-        <div>
-          <form action="" class="flex space-x-5">
-            <?php
-            if ($_SESSION['userLogged'] != null) {
-              switch ($_SESSION['userLogged']->role) {
-                case 'ADMIN':
-                  echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
-                  break;
-                case 'CLIENTE':
-                  echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
-                  break;
-                case 'COCINERO':
-                  echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
-                  break;
-                default:
-                  # code...
-                  break;
+  <div class="bg-custom-red w-full py-8">
+    <nav class="bg-white shadow rounded-2xl max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
+      <div class="container px-6 py-3">
+        <div class="flex justify-between items-center">
+          <div class="w-16 mr-5">
+            <a href="./index.php">
+              <img src="./web/media/icons/foodify_name_logo_white.png" alt="Foodify logo" class="w-full h-auto">
+            </a>
+          </div>
+          <div>
+            <form action="" class="flex space-x-5">
+              <?php
+              if ($_SESSION['userLogged'] != null) {
+                switch ($_SESSION['userLogged']->role) {
+                  case 'ADMIN':
+                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
+                    break;
+                  case 'CLIENTE':
+                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
+                    break;
+                  case 'COCINERO':
+                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i> Acceso Cocina</button>';
+                    break;
+                  default:
+                    # code...
+                    break;
+                }
+              } else {
+                echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
+                echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
               }
-            } else {
-              echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
-              echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
-            }
-            ?>
-            <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
-            <?php
-            if ($_SESSION['userLogged'] != null) {
-              echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
-            }
-            ?>
-          </form>
+              ?>
+              <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
+              <?php
+              if ($_SESSION['userLogged'] != null) {
+                echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
+              }
+              ?>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-  <br>
-  <h1 class="text-3xl font-bold text-custom-red mb-4 mt-1">Zona de administración</h1>
+    </nav>
+    <br><br>
+    <h1 class="text-3xl font-bold text-custom-red mb-4 mt-1">Zona de administración</h1>
 
-  <div class="bg-custom-red w-full py-8">
     <div class="max-w-screen-md mx-auto px-6">
 
       <?php if ($_SESSION['userLogged']->role == 'ADMIN') : ?>
-        <h2 class="text-2xl font-bold  mb-4 text-center">¡Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
+        <h2 class="text-white text-2xl mb-4 text-center">¡Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
         <p class="text-white text-center mb-6 text-center"> Bienvenido al panel de administración de Foodify. Desde aquí puedes gestionar usuarios, pedidos y platos.</p>
-        <br>
       <?php else: ?>
-        <h2 class="text-2xl font-bold mb-4 text-center">¡Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
-        <p class="text-white text-center mb-6 text-center">Bienvenido a la cocina aqui puedes gestionar los pedidos de la Cocina</p>
-        <br>
+        <h2 class="text-white text-2xl font-bold mb-4 text-center">¡Hola, <?php echo $_SESSION['userLogged']->first_name; ?>!</h2>
+        <p class="text-white text-center mb-6 text-center">Bienvenido a la cocina, aquí puedes gestionar los pedidos de los clientes.</p>
       <?php endif; ?>
 
       <!-- BOTONES -->

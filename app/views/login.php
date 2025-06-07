@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="web/css/login_style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="web/media/icons/favicon-96x96.png">
 </head>
 
 <body class="bg-gray-100">
@@ -16,20 +17,24 @@
     <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
         <div class="container px-6 py-3">
             <div class="flex justify-between items-center">
-                <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
-                <div>
+
+                <div class="w-16 mr-5">
+                    <a href="./index.php">
+                        <img src="./web/media/icons/foodify_name_logo_white.png" alt="Foodify logo" class="w-full h-auto">
+                    </a>
+                </div>                <div>
                     <form action="" class="flex space-x-5">
                         <?php
                         if ($_SESSION['userLogged'] != null) {
                             switch ($_SESSION['userLogged']->role) {
                                 case 'ADMIN':
-                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i> Acceso Administrador</button>';
                                     break;
                                 case 'CLIENTE':
-                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
                                     break;
                                 case 'COCINERO':
-                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i> Acceso Cocina</button>';
                                     break;
                                 default:
                                     # code...
@@ -118,8 +123,10 @@
                                 class="fab fa-youtube fa-2x"></i> </a>
                     </div>
 
-                    <div class="mt-6 text-gray-800 text-4xl font-bold">Foodify</div>
-                </div>
+
+                    <div class="mt-5">
+                        <img src="./web/media/icons/foodify_name_logo.jpeg" alt="">
+                    </div>                </div>
 
                 <div class="bg-gray-100 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Conócenos</h3>

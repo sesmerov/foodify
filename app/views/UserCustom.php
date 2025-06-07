@@ -1,8 +1,6 @@
-
-
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="./css/user_style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="web/media/icons/favicon-96x96.png">
+
 </head>
 
 <body class="bg-gray-100">
@@ -18,8 +18,11 @@
     <nav class="bg-white shadow rounded-2xl mt-3 max-w-4xl mx-auto absolute left-1/2 transform -translate-x-1/2 z-10">
         <div class="container px-6 py-3">
             <div class="flex justify-between items-center">
-                <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
-                <div>
+                <div class="w-16 mr-5">
+                    <a href="./index.php">
+                        <img src="./web/media/icons/foodify_name_logo_white.png" alt="Foodify logo" class="w-full h-auto">
+                    </a>
+                </div>                <div>
                     <form action="" class="flex space-x-5">
                         <?php
                         if ($_SESSION['userLogged'] != null) {
@@ -31,7 +34,7 @@
                                     echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i> Tu Perfil</button>';
                                     break;
                                 case 'COCINERO':
-                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i> Acceso Cocina</button>';
                                     break;
                                 default:
                                     # code...
@@ -53,28 +56,28 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- EDITAR DATOS -->
     <section class="flex justify-center items-center py-20 bg-gray-100">
         <div class="bg-white p-8 rounded-3xl border shadow-lg w-full max-w-5xl mt-10">
             <h2 class="text-2xl font-bold text-center text-gray-700 mb-8">Editar Información</h2>
 
-            <form action="index.php" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6"   >
-       
+            <form action="index.php" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
                 <input type="hidden" name="ord" value="modpostU">
                 <input type="hidden" name="id" value="<?php echo $user->id_user; ?>">
                 <input type="hidden" name="role" value="<?php echo $user->role; ?>">
 
                 <div>
                     <label for="nuevo-nombre" class="block text-sm font-medium text-gray-600 mt-2">Nombre</label>
-                    <input type="text" id="nuevo-nombre" name="nuevo-nombre" value= "<?php echo $user->first_name;?>"
+                    <input type="text" id="nuevo-nombre" name="nuevo-nombre" value="<?php echo $user->first_name; ?>"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500">
                 </div>
 
                 <div>
                     <label for="nuevo-apellido" class="block text-sm font-medium text-gray-600 mt-2">
                         Apellido</label>
-                    <input type="text" id="nuevo-apellido" name="nuevo-apellido" value = "<?php echo $user->last_name;?>"
+                    <input type="text" id="nuevo-apellido" name="nuevo-apellido" value="<?php echo $user->last_name; ?>"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500">
                 </div>
 
@@ -87,7 +90,7 @@
                 <div>
                     <label for="nueva-direccion" class="block text-sm font-medium text-gray-600 mt-2">
                         Dirección</label>
-                    <input type="text" id="nueva-direccion" name="nueva-direccion" value =  "<?php echo $user->address; ?>"
+                    <input type="text" id="nueva-direccion" name="nueva-direccion" value="<?php echo $user->address; ?>"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500">
                 </div>
 
@@ -128,7 +131,9 @@
                                 class="fab fa-youtube fa-2x"></i> </a>
                     </div>
 
-                    <div class="mt-6 text-gray-800 text-4xl font-bold">Foodify</div>
+                    <div class="mt-5">
+                        <img src="./web/media/icons/foodify_name_logo.jpeg" alt="">
+                    </div>
                 </div>
 
                 <div class="bg-gray-100 p-6 rounded-lg">
@@ -176,4 +181,5 @@
         </div>
     </footer>
 </body>
+
 </html>
