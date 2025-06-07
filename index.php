@@ -8,6 +8,10 @@ include_once 'app/models/User.php';
 include_once 'app/models/Order.php';
 include_once 'app/models/Allergen.php';
 include_once 'app/controllers/OrderController.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/app/');
+$dotenv->load();
 
 session_start();
 if (!isset($id_dish)) {
@@ -123,11 +127,39 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         case 'cart':
             ob_clean();
 
+            $message = null;
+            if (isset($_GET['payment'])) {
+    if ($_GET['payment'] === 'success') {
+        // Verifica que haya un pedido pendiente
+        if (isset($_SESSION['pending_order'])) {
+            $data = $_SESSION['pending_order'];
+
+            // Guarda la orden
+            $orders->AddOrder(
+                $data['date'],
+                $data['amount'] / 100, 
+                $data['address'],
+                'PENDIENTE',
+                $data['user_id']
+            );
+
+            unset($_SESSION['pending_order']);
+        }
+
+        $_SESSION['cart'] = [];
+        $message = "✅ ¡Pago completado con éxito!";
+    } elseif ($_GET['payment'] === 'cancel') {
+        $message = "❌ El pago fue cancelado.";
+    }
+}
+
+
             $ids = array_keys($_SESSION['cart']);
             $cartDishes = $controller->getDishesByIds($ids);
 
-            include_once 'app/views/cartview.php';
+            include 'app/views/cartview.php';
             break;
+
         case 'addToCart':
             ob_clean();
             $id_dish = $_GET['id_dish'];
@@ -357,18 +389,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if ($_SESSION['userLogged'] == null || $_SESSION['userLogged']->role !== 'CLIENTE') {
                 header("Location: index.php?order=login");
             } else {
-                $user = $_SESSION['userLogged'];
-                if ($user) {
-                    $ids = array_keys($_SESSION['cart']);
-                    $cartDishes = $controller->getDishesByIds($ids);
-                    $date = $_POST['date'];
-                    $total = $_POST['total'];
-                    $orders->AddOrder($date, $total, $user->address, "PENDIENTE", $user->id_user);
-                    $_SESSION['cart'] = [];
-                }
-                header("Location: index.php");
+                // Guarda datos necesarios para crear el pedido tras el pago
+                $_SESSION['pending_order'] = [
+                    'date' => $_POST['date'],
+                    'amount' => $_POST['amount']
+                ];
+
+                include_once 'app/views/checkout.php';
             }
-            break;
+            exit;
         case 'modpostU':
             ob_clean();
             $user = $_SESSION['userLogged'];
@@ -465,6 +494,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $controller->addDish($_POST["name"], $_POST["price"], $_POST["type"], $_POST["details"], $_POST["allergens"] ?? [], $_FILES['image'] ?? null);
                 header("Location: index.php?order=admin");
             }
-            break;
+            break;  
     }
 }

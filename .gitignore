@@ -1,3 +1,10 @@
 # Ignore config file
 configDB.php
-
+.env
+.env.local
+/vendor/
+*.log
+.cache/
+.vscode/
+.DS_Store
+Thumbs.db
