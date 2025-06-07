@@ -1,3 +1,7 @@
+<?php
+$user = $_SESSION['userLogged'] ?? null;
+$isClient = $user && $user->role === 'CLIENTE';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -123,7 +127,11 @@
                 <input type="hidden" name="ord" value="submitcart">
                 <input type="hidden" name="date" value="<?= date('Y-m-d H:i:s.u') ?>">
                 <input type="hidden" name="amount" value="<?= $total * 100 ?>">
-                <button type="submit" class="w-48 bg-white border-2 border-red-500 text-red-500 font-bold py-2 px-6 rounded-3xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out transform">
+                <button
+                    type="submit"
+                    class="w-48 border-2 font-bold py-2 px-6 rounded-3xl transition-all duration-300 ease-in-out transform
+        <?= $isClient ? 'bg-white border-red-500 text-red-500 hover:bg-red-500 hover:text-white hover:scale-105' : 'bg-gray-300 border-gray-400 text-gray-500 cursor-not-allowed' ?>"
+                    <?= $isClient ? '' : 'disabled' ?>>
                     Realizar Pedido
                 </button>
             </form>

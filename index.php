@@ -2,6 +2,7 @@
 include_once 'app/controllers/dishController.php';
 include_once 'app/controllers/userController.php';
 include_once 'app/helpers/utilities.php';
+include_once 'app/helpers/emailHelper.php';
 include_once 'app/models/DatabaseConnection.php';
 include_once 'app/models/Dish.php';
 include_once 'app/models/User.php';
@@ -10,7 +11,7 @@ include_once 'app/models/Allergen.php';
 include_once 'app/controllers/OrderController.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
- $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/app/');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/app/');
 $dotenv->load();
 
 session_start();
@@ -129,29 +130,29 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
             $message = null;
             if (isset($_GET['payment'])) {
-    if ($_GET['payment'] === 'success') {
-        // Verifica que haya un pedido pendiente
-        if (isset($_SESSION['pending_order'])) {
-            $data = $_SESSION['pending_order'];
+                if ($_GET['payment'] === 'success') {
+                    // Verifica que haya un pedido pendiente
+                    if (isset($_SESSION['pending_order'])) {
+                        $data = $_SESSION['pending_order'];
 
-            // Guarda la orden
-            $orders->AddOrder(
-                $data['date'],
-                $data['amount'] / 100, 
-                $data['address'],
-                'PENDIENTE',
-                $data['user_id']
-            );
+                        // Guarda la orden
+                        $orders->AddOrder(
+                            $data['date'],
+                            $data['amount'] / 100,
+                            $data['address'],
+                            'PENDIENTE',
+                            $data['user_id']
+                        );
 
-            unset($_SESSION['pending_order']);
-        }
+                        unset($_SESSION['pending_order']);
+                    }
 
-        $_SESSION['cart'] = [];
-        $message = "✅ ¡Pago completado con éxito!";
-    } elseif ($_GET['payment'] === 'cancel') {
-        $message = "❌ El pago fue cancelado.";
-    }
-}
+                    $_SESSION['cart'] = [];
+                    $message = "✅ ¡Pago completado con éxito!";
+                } elseif ($_GET['payment'] === 'cancel') {
+                    $message = "❌ El pago fue cancelado.";
+                }
+            }
 
 
             $ids = array_keys($_SESSION['cart']);
@@ -463,6 +464,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $role = $_POST['role'] ?? 'CLIENTE';
 
             $result = $users->adduser($nombre, $apellido, $email, $direccion, $contrasena, $role);
+            sendEmail(
+                $email,
+                '¡Bienvenido a Foodify!',
+                "<h1>Gracias por registrarte en Foodify</h1><p>Hola $nombre, tu cuenta ha sido creada correctamente.</p>"
+            );
 
             if ($result === true) {
                 $user = $users->getUserByEmail($email);
@@ -484,6 +490,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $direccion = $_POST['direccion'];
             $estado = $_POST['estado'];
             $orders->updateOrder($id_order, $direccion, $estado);
+
+
+            // Obtener detalles del pedido y usuario para enviar el email
+            $order = $orders->getOrderById($id_order);
+            $user = $users->getUserById($order->id_user);
+
+            $subject = "Estado actualizado de tu pedido #{$id_order}";
+            $bodyHtml = "
+                        <h2>Hola!</h2>
+                        <p>El estado de tu pedido <strong>#{$id_order}</strong> ha cambiado a: <strong>{$estado}</strong>.</p>
+                        <p>Gracias por confiar en Foodify 🍽️</p>
+                        ";
+
+            sendEmail($user->email, $subject, $bodyHtml);
+
+
             header("Location: index.php?order=order");
             break;
         case 'addpostD':
@@ -494,6 +516,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $controller->addDish($_POST["name"], $_POST["price"], $_POST["type"], $_POST["details"], $_POST["allergens"] ?? [], $_FILES['image'] ?? null);
                 header("Location: index.php?order=admin");
             }
-            break;  
+            break;
     }
 }

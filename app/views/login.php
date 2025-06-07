@@ -19,34 +19,33 @@
                 <div class="text-lg font-semibold text-gray-800 mr-12"> <a href="./index.php">Foodify</a> </div>
                 <div>
                     <form action="" class="flex space-x-5">
-                        <?php 
-                            if ($_SESSION['userLogged'] != null) {
-                                switch ($_SESSION['userLogged']->role) {
-                                    case 'ADMIN':
-                                        echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
-                                        break;
-                                    case 'CLIENTE':
-                                        echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
-                                        break;
-                                    case 'COCINERO':
-                                        echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
-                                        break;
-                                    default:
-                                        # code...
-                                        break;
-                                }
-
-                            } else {
-                                echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
-                                echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            switch ($_SESSION['userLogged']->role) {
+                                case 'ADMIN':
+                                    echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
+                                    break;
+                                case 'CLIENTE':
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    break;
+                                case 'COCINERO':
+                                    echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
+                                    break;
+                                default:
+                                    # code...
+                                    break;
                             }
+                        } else {
+                            echo '<button class="nav-button text-sm" name="order" value="login">Iniciar Sesión</button>';
+                            echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
+                        }
                         ?>
                         <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
-                        <?php 
-                            if ($_SESSION['userLogged'] != null) {
-                               echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
-                            }
-                            ?>    
+                        <?php
+                        if ($_SESSION['userLogged'] != null) {
+                            echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
+                        }
+                        ?>
                     </form>
                 </div>
             </div>
@@ -71,6 +70,7 @@
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
                     <input type="email" id="email" name="email"
+                        value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
                         required>
                 </div>

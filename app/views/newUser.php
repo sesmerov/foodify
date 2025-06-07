@@ -51,78 +51,82 @@
         </div>
     </nav>
 
-<div class="hero flex items-center justify-center min-h-[12rem] bg-red-500 pt-20 pb-10">
-    <div class="text-center text-white px-4 w-full pt-8 pb-6">
-        <h1 class="text-3xl sm:text-4xl font-bold whitespace-nowrap px-4">¡Únete a Foodify hoy!</h1>
-        <p class="mt-4 text-base sm:text-lg max-w-md md:max-w-lg mx-auto">
-            Regístrate para comenzar a explorar deliciosos platos, guardar tus favoritos y vivir una experiencia gastronómica personalizada. ¡Es rápido y fácil!
-        </p>
+    <div class="hero flex items-center justify-center min-h-[12rem] bg-red-500 pt-20 pb-10">
+        <div class="text-center text-white px-4 w-full pt-8 pb-6">
+            <h1 class="text-3xl sm:text-4xl font-bold whitespace-nowrap px-4">¡Únete a Foodify hoy!</h1>
+            <p class="mt-4 text-base sm:text-lg max-w-md md:max-w-lg mx-auto">
+                Regístrate para comenzar a explorar deliciosos platos, guardar tus favoritos y vivir una experiencia gastronómica personalizada. ¡Es rápido y fácil!
+            </p>
+        </div>
     </div>
-</div>
 
 
-<!-- REGISTRO -->
-<section class="flex justify-center items-center py-20 bg-gray-100">
-    <div class="bg-white p-8 rounded shadow-lg w-full max-w-md mt-10">
-        <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Registrarse</h2>
-        <form action="index.php" method="post" class="space-y-4">
+    <!-- REGISTRO -->
+    <section class="flex justify-center items-center py-20 bg-gray-100">
+        <div class="bg-white p-8 rounded shadow-lg w-full max-w-md mt-10">
+            <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Registrarse</h2>
+            <form action="index.php" method="post" class="space-y-4">
 
-            <input type="hidden" name="ord" value="register">
-            <input type="hidden" name="role" value="CLIENTE">
-            <div>
-                <label for="nombre" class="block text-sm font-medium text-gray-600">Nombre</label>
-                <input type="text" id="nombre" name="nombre"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
-                    required>
-            </div>
-            <div>
-                <label for="apellido" class="block text-sm font-medium text-gray-600">Apellido</label>
-                <input type="text" id="apellido" name="apellido"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
-                    required>
-            </div>
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-600">Correo electrónico</label>
-                <input type="email" id="email" name="email"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
-                    required>
-            </div>
-            <div>
-                <label for="direccion" class="block text-sm font-medium text-gray-600">Dirección</label>
-                <input type="text" id="direccion" name="direccion"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
-                    required>
-            </div>
-            <div>
-                <label for="contrasena" class="block text-sm font-medium text-gray-600">Contraseña</label>
-                <input type="password" id="contrasena" name="contrasena"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
-                    required>
+                <input type="hidden" name="ord" value="register">
+                <input type="hidden" name="role" value="CLIENTE">
+                <div>
+                    <label for="nombre" class="block text-sm font-medium text-gray-600">Nombre</label>
+                    <input type="text" id="nombre" name="nombre"
+                        value="<?= isset($_POST['nombre']) ? htmlspecialchars($_POST['nombre']) : '' ?>"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
+                        required>
+                </div>
+                <div>
+                    <label for="apellido" class="block text-sm font-medium text-gray-600">Apellido</label>
+                    <input type="text" id="apellido" name="apellido"
+                        value="<?= isset($_POST['apellido']) ? htmlspecialchars($_POST['apellido']) : '' ?>"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
+                        required>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-600">Correo electrónico</label>
+                    <input type="email" id="email" name="email"
+                        value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
+                        required>
+                </div>
+                <div>
+                    <label for="direccion" class="block text-sm font-medium text-gray-600">Dirección</label>
+                    <input type="text" id="direccion" name="direccion"
+                        value="<?= isset($_POST['direccion']) ? htmlspecialchars($_POST['direccion']) : '' ?>"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
+                        required>
+                </div>
+                <div>
+                    <label for="contrasena" class="block text-sm font-medium text-gray-600">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
+                        required>
                     <label for="contrasena" class="block text-sm font-medium text-gray-600"> confirmar Contraseña</label>
                     <input type="password" id="contrasena2" name="contrasena2"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500"
                         required>
+                </div>
+                <div>
+                    <button type="submit"
+                        class="w-full bg-white text-red-500 border border-red-500 hover:bg-red-500 hover:text-white transition-colors transition-transform duration-300 transform hover:scale-105 font-semibold py-2 px-4 rounded-2xl mt-6">
+                        Registrarse
+                    </button>
+                </div>
+            </form>
+            <?php if (!empty($registerError)): ?>
+                <div class="alert alert-danger">
+                    <?php echo htmlspecialchars($registerError); ?>
+                </div>
+            <?php endif; ?>
+            <div class="mt-4 text-center">
+                <p class="text-sm text-gray-600">
+                    ¿Ya tienes una cuenta?
+                    <a href="index.php?order=login" class="text-red-500 hover:underline">Inicia sesión</a>
+                </p>
             </div>
-            <div>
-                <button type="submit"
-                    class="w-full bg-white text-red-500 border border-red-500 hover:bg-red-500 hover:text-white transition-colors transition-transform duration-300 transform hover:scale-105 font-semibold py-2 px-4 rounded-2xl mt-6">
-                    Registrarse
-                </button>
-            </div>
-        </form>
-        <?php if (!empty($registerError)): ?>
-    <div class="alert alert-danger">
-        <?php echo htmlspecialchars($registerError); ?>
-    </div>
-<?php endif; ?>
-        <div class="mt-4 text-center">
-            <p class="text-sm text-gray-600">
-                ¿Ya tienes una cuenta?
-                <a href="index.php?order=login" class="text-red-500 hover:underline">Inicia sesión</a>
-            </p>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <br><br>
@@ -193,4 +197,5 @@
         </div>
     </footer>
 </body>
+
 </html>
