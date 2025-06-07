@@ -26,7 +26,7 @@
                                     echo '<button class="nav-button text-sm" name="order" value="admin"><i class="fas fa-user-circle"></i>Acceso Administrador</button>';
                                     break;
                                 case 'CLIENTE':
-                                    echo '<button class="nav-button text-sm" name="order" value="usu"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
+                                    echo '<button class="nav-button text-sm" name="order" value="profile"><i class="fas fa-user-circle"></i>Tu Perfil</button>';
                                     break;
                                 case 'COCINERO':
                                     echo '<button class="nav-button text-sm" name="order" value="kitchen"><i class="fas fa-user-circle"></i>Acceso Cocina</button>';
@@ -67,6 +67,11 @@
         <?php
         $cartItemCount = array_sum($_SESSION['cart']);
         ?>
+        <?php if (isset($message)): ?>
+            <div class="bg-<?= $_GET['payment'] === 'success' ? 'green' : 'red' ?>-100 border border-<?= $_GET['payment'] === 'success' ? 'green' : 'red' ?>-400 text-<?= $_GET['payment'] === 'success' ? 'green' : 'red' ?>-700 px-4 py-3 rounded mb-4">
+                <?= $message ?>
+            </div>
+        <?php endif; ?>
 
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Tu Carrito</h1>
@@ -94,7 +99,7 @@
                         </div>
                         <form method="GET" action="index.php?">
                             <input type="hidden" name="order" value="removeFromCart">
-                            <input type="hidden" name="id_dish" value="<?= $dish->id_dish?>">
+                            <input type="hidden" name="id_dish" value="<?= $dish->id_dish ?>">
                             <button type="submit" class="text-red-500 hover:text-red-700" title="Eliminar del carrito">
                                 <a href="index.php?order=removeFromCart&id=<?= $dish->id_dish ?>" title="Eliminar del carrito" class="text-red-500 hover:text-red-700">
                                     <i class="fas fa-trash-alt"></i>
@@ -114,13 +119,13 @@
             </div>
         </div>
         <div class="flex justify-center mt-6">
-        <form method="POST" action="index.php">
-         <input type="hidden" name="ord" value="submitcart">
-        <input type="hidden" name="date" value="<?= date('Y-m-d H:i:s.u') ?>">
-        <input type="hidden" name="total" value="<?= $total ?>">
-        <button type="submit" class="w-48 bg-white border-2 border-red-500 text-red-500 font-bold py-2 px-6 rounded-3xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out transform">
-               Realizar Pedido  
-            </button>
+            <form method="POST" action="index.php?order=submitcart">
+                <input type="hidden" name="ord" value="submitcart">
+                <input type="hidden" name="date" value="<?= date('Y-m-d H:i:s.u') ?>">
+                <input type="hidden" name="amount" value="<?= $total * 100 ?>">
+                <button type="submit" class="w-48 bg-white border-2 border-red-500 text-red-500 font-bold py-2 px-6 rounded-3xl hover:bg-red-500 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out transform">
+                    Realizar Pedido
+                </button>
             </form>
         </div> <br>
     </div>

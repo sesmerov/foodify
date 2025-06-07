@@ -436,16 +436,25 @@ class DatabaseConnection
     public function addOrder($order)
     {
         $stmt = $this->dbh->prepare("INSERT INTO public.order (order_date, total_price, delivery_address, status, id_user) VALUES (:order_date, :total_price, :delivery_address, :status, :id_user)");
-        $stmt->bindParam(':order_date', $order->__get('order_date'));
-        $stmt->bindParam(':total_price', $order->__get('total_price'));
-        $stmt->bindParam(':delivery_address', $order->__get('delivery_address'));
-        $stmt->bindParam(':status', $order->__get('status'));
-        $stmt->bindParam(':id_user', $order->__get('id_user'));
+
+        $order_date = $order->__get('order_date');
+        $total_price = $order->__get('total_price');
+        $delivery_address = $order->__get('delivery_address');
+        $status = $order->__get('status');
+        $id_user = $order->__get('id_user');
+
+        $stmt->bindParam(':order_date', $order_date);
+        $stmt->bindParam(':total_price', $total_price);
+        $stmt->bindParam(':delivery_address', $delivery_address);
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':id_user', $id_user);
+
         if ($stmt->execute()) {
             return $this->dbh->lastInsertId();
         }
         return false;
     }
+
 
     public function addOrderDetail($id_order, $id_dish, $unit_price, $quantity)
     {
