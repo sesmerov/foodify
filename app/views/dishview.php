@@ -46,7 +46,7 @@
                             echo '<button class="nav-button text-sm" name="order" value="register">Registrate</button>';
                         }
                         ?>
-                        <button class="nav-button text-sm" name="order"><i class="fas fa-shopping-cart"></i> Carrito</button>
+                        <button class="nav-button text-sm" name="order" value="cart"><i class="fas fa-shopping-cart"></i> Carrito</button>
                         <?php
                         if ($_SESSION['userLogged'] != null) {
                             echo ' <button class="nav-button text-sm" name="order" value="logout"><i class="fas fa-sign-out-alt"></i> Salir</button>';
@@ -57,7 +57,6 @@
             </div>
         </div>
     </nav>
-
 
     <!-- INTRODUCCIÓN -->
     <div class="hero flex items-center justify-center h-96">
@@ -76,8 +75,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="max-w-6xl mx-auto bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-lg mt-10">
 
