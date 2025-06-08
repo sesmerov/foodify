@@ -153,6 +153,11 @@
 
         <p class="text-gray-600 mt-4">Raciones de 420 a 500 gr pensadas como plato único.</p>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-9 mt-4">
+            <?php if (empty($dishes)): ?>
+                <div class="text-center font-bold text-gray-600 text-xl py-10 col-span-full">
+                    No se encontraron platos que coincidan con los filtros seleccionados.
+                </div>
+            <?php endif; ?>
             <?php foreach ($dishes as $dish): ?>
                 <div class="bg-white shadow-md rounded-lg relative pb-6">
                     <div class="relative">
