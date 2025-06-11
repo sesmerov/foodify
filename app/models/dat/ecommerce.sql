@@ -148,20 +148,35 @@ INSERT INTO order_detail (id_order, id_dish, unit_price, quantity) VALUES
 (10, 9, 4.99, 1), -- Sopa de verduras
 (10, 10, 11.99, 1); -- Pizza de 4 quesos
 
--- Inserting data for 'dish_allergen'
 INSERT INTO dish_allergen (id_allergen, id_dish) VALUES
-(1, 1),  -- Ensalada mixta -> Gluten
-(2, 1),  -- Ensalada mixta -> Lactosa
-(5, 2),  -- Paella de mariscos -> Pescado
+(1, 1),  -- Ensalada mixta -> Gluten (croutons o aliño comercial)
+(2, 1),  -- Ensalada mixta -> Lactosa (queso posible)
+
+(5, 2),  -- Paella de mariscos -> Huevos (puede llevar alioli)
 (7, 2),  -- Paella de mariscos -> Mariscos
-(1, 3),  -- Tacos de carne -> Gluten
-(3, 3),  -- Tacos de carne -> Frutos secos
-(5, 4),  -- Salmón al horno -> Pescado
-(2, 5),  -- Pasta con pesto -> Lactosa
-(1, 6),  -- Pollo asado -> Gluten
-(2, 7),  -- Ceviche -> Lactosa
-(1, 8),  -- Hamburguesa clásica -> Gluten 
-(6, 9),  -- Sopa de verduras -> Huevos
+(6, 2),  -- Paella de mariscos -> Pescado
+
+(1, 3),  -- Tacos de carne -> Gluten (tortilla de trigo)
+(5, 3),  -- Tacos de carne -> Huevos (salsas)
+(8, 3),  -- Tacos de carne -> Cacahuetes (posibles en salsa estilo mexicana)
+
+(6, 4),  -- Salmón al horno -> Pescado
+
+(1, 5),  -- Pasta con pesto -> Gluten (pasta)
+(2, 5),  -- Pasta con pesto -> Lactosa (queso del pesto)
+(3, 5),  -- Pasta con pesto -> Frutos secos (piñones en el pesto)
+
+(1, 6),  -- Pollo asado -> Gluten (posible en marinado o salsa)
+
+(6, 7),  -- Ceviche -> Pescado
+(7, 7),  -- Ceviche -> Mariscos
+
+(1, 8),  -- Hamburguesa clásica -> Gluten (pan)
+(2, 8),  -- Hamburguesa clásica -> Lactosa (queso)
+(5, 8),  -- Hamburguesa clásica -> Huevos (salsas tipo mayonesa)
+
 (1, 10), -- Pizza de 4 quesos -> Gluten
-(5, 11), -- Tartar de atún -> Pescado
+(2, 10), -- Pizza de 4 quesos -> Lactosa
+
+(6, 11), -- Tartar de atún -> Pescado
 (7, 11); -- Tartar de atún -> Mariscos
